@@ -83,19 +83,19 @@ class Annotation: NSObject, MKAnnotation {
   }
   
   var image: UIImage {
-    guard let name = discipline else { return #imageLiteral(resourceName: "Flag") }
+    guard let name = discipline else { return #imageLiteral(resourceName: "defaultAvatar") }
     
     switch name {
     case "Monument":
-      return #imageLiteral(resourceName: "Monument")
+      return #imageLiteral(resourceName: "defaultAvatar")
     case "Sculpture":
-      return #imageLiteral(resourceName: "Sculpture")
+      return #imageLiteral(resourceName: "defaultAvatar_icon")
     case "Plaque":
-      return #imageLiteral(resourceName: "Plaque")
+      return #imageLiteral(resourceName: "defaultAvatar")
     case "Mural":
-      return #imageLiteral(resourceName: "Mural")
+      return #imageLiteral(resourceName: "defaultAvatar_icon")
     default:
-      return #imageLiteral(resourceName: "Flag")
+      return #imageLiteral(resourceName: "defaultAvatar_icon")
     }
   }
 }

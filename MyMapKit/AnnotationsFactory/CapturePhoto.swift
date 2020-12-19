@@ -11,11 +11,13 @@ import AVFoundation
 class CapturePhoto: UIViewController {
     
     @IBOutlet weak var switchCameraButton: UIButton!
+    @IBOutlet weak var shadow: UIView!
     @IBOutlet weak var captureImageButton: UIButton!
     @IBOutlet weak var layerOfCaptureImageButton: UIView!
     
     @IBOutlet weak var capturedImageView: CapturedImageView!
     @IBOutlet weak var leadingConstraintCIV: NSLayoutConstraint!
+    @IBOutlet weak var streamVideoView: UIView!
     
     //MARK:- Vars
     var captureSession : AVCaptureSession!
@@ -54,16 +56,24 @@ class CapturePhoto: UIViewController {
         switchCameraButton.setImage(image, for: .normal)
         switchCameraButton.tintColor = .white
         switchCameraButton.translatesAutoresizingMaskIntoConstraints = false
+    
+        shadow.layer.shadowColor = UIColor.black.cgColor
+        shadow.layer.shadowOpacity = 0.2
+        shadow.layer.shadowRadius = 35.0
+        shadow.layer.shadowOffset = .zero
+        shadow.layer.shadowPath = UIBezierPath(rect: shadow.bounds).cgPath
+        shadow.layer.shouldRasterize = true
         
 //        captureImageButton.setImage(imageCapture, for: .normal)
 //        captureImageButton.tintColor = .white
 //        captureImageButton.translatesAutoresizingMaskIntoConstraints = false
-        captureImageButton.layer.borderWidth = 2
-        captureImageButton.layer.borderColor = UIColor.black.cgColor
-        captureImageButton.layer.cornerRadius = captureImageButton.frame.size.height/2
-        captureImageButton.clipsToBounds = true
-        layerOfCaptureImageButton.layer.cornerRadius = layerOfCaptureImageButton.frame.size.height/2
-        layerOfCaptureImageButton.clipsToBounds = true
+//        captureImageButton.layer.borderWidth = 2
+//        captureImageButton.layer.borderColor = UIColor.black.cgColor
+        captureImageButton.roundedBorder()
+        layerOfCaptureImageButton.roundedBorder()
+        layerOfCaptureImageButton.backgroundColor = .clear
+        layerOfCaptureImageButton.layer.borderWidth = 6
+        layerOfCaptureImageButton.layer.borderColor = UIColor.white.cgColor
     }
     
     //MARK:- Camera Setup
@@ -152,7 +162,7 @@ class CapturePhoto: UIViewController {
     
     func setupPreviewLayer() {
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        view.layer.insertSublayer(previewLayer, below: switchCameraButton.layer)
+        streamVideoView.layer.insertSublayer(previewLayer, below: switchCameraButton.layer)
         previewLayer.videoGravity = .resizeAspectFill
         previewLayer.frame = view.frame
     }
@@ -315,7 +325,26 @@ extension CapturePhoto {
     }
 }
 
+class GlowBall: UIView {
+    private lazy var pulse: CAGradientLayer = {
+        let l = CAGradientLayer()
+        l.type = .radial
+        l.colors = [ UIColor.black.cgColor,
+            UIColor.clear.cgColor]
+        l.locations = [ 0, 1 ]
+        l.startPoint = CGPoint(x: 0.5, y: 0.5)
+        l.endPoint = CGPoint(x: 1, y: 1)
+        layer.addSublayer(l)
+        return l
+    }()
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        pulse.frame = bounds
+        pulse.cornerRadius = bounds.width / 2.0
+    }
+
+}
 
 
 

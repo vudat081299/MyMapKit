@@ -46,7 +46,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     
     // MARK: - Consts
-    let image = UIImage(named: "camera")?.withRenderingMode(.alwaysTemplate)
+    let image = UIImage(named: "camera_icon")?.withRenderingMode(.alwaysTemplate)
     
     
     // MARK: - Variables
@@ -76,17 +76,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 //        let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 200000)
 //        mapView.setCameraZoomRange(zoomRange, animated: true)
         
-        setUpViewUserInfoButton()
-        
-        takePhotoViewButton.setImage(image, for: .normal)
-        takePhotoViewButton.tintColor = .link
+        setUpView()
     }
-    
-    
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        isJustGetintoApp = true
+        setUpAnnotations()
+    }
+    
+    func setUpAnnotations() {
         mapView?.delegate = self
         
         mapView?.register(
@@ -95,8 +94,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         loadInitialData()
         mapView?.addAnnotations(artworks)
-        
-        isJustGetintoApp = true
     }
     
     func setUpUserLocationGetter() {
@@ -109,6 +106,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    // load annotations from file geojson
     private func loadInitialData() {
         // 1
         guard
@@ -133,7 +131,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    func setUpViewUserInfoButton() {
+    func setUpView() {
+        takePhotoViewButton.setImage(image, for: .normal)
+        takePhotoViewButton.tintColor = .black
+        userInfoButton.roundedBorder()
     }
 }
 
@@ -162,9 +163,9 @@ extension ViewController: MKMapViewDelegate {
         guard let artwork = view.annotation as? Annotation else {
             return
         }
-        
-        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
-        artwork.mapItem?.openInMaps(launchOptions: launchOptions)
+        performSegue(withIdentifier: "annotationDetail", sender: self)
+//        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
+//        artwork.mapItem?.openInMaps(launchOptions: launchOptions)
     }
     
 //    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

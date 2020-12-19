@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "photo-camera-2.png",
+      "filename" : "profile_144x144-2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "photo-camera-1.png",
+      "filename" : "profile_144x144-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "photo-camera.png",
+      "filename" : "profile_144x144.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

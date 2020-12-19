@@ -10,7 +10,7 @@ import MapKit
 
 // MARK: - Global consts.
 struct AnnotationConfig {
-    static let length_edge = 30
+    static let length_edge = 40
     static let border_width = CGFloat(3)
     static let border_color = UIColor.white.cgColor
 }
@@ -49,9 +49,7 @@ class AnnotationView: MKAnnotationView {
             frame = CGRect(x: 0, y: 0, width: AnnotationConfig.length_edge, height: AnnotationConfig.length_edge)
             imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: AnnotationConfig.length_edge, height: AnnotationConfig.length_edge))
             imageView.backgroundColor = UIColor.white
-            imageView.layer.cornerRadius = imageView.frame.size.height / 2
-//            imageView.clipsToBounds = true
-            imageView.layer.masksToBounds = true
+            imageView.roundedBorder()
             imageView.layer.borderWidth = AnnotationConfig.border_width
             imageView.layer.borderColor = AnnotationConfig.border_color
             addSubview(imageView)
@@ -80,33 +78,30 @@ class AnnotationView: MKAnnotationView {
             
             canShowCallout = true
             calloutOffset = CGPoint(x: 0, y: 0)
-            let mapsButton = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: self.frame.size.height, height: self.frame.size.height)))
-            mapsButton.setBackgroundImage(#imageLiteral(resourceName: "Map"), for: .normal)
+            let mapsButton = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 40, height: 40)))
+            mapsButton.setBackgroundImage(currentAnnotation.image, for: .normal)
             leftCalloutAccessoryView = mapsButton
             
-            image = artwork.image
-            
+            // image on map
+            image = currentAnnotation.image
             
             let detailLabel = UILabel()
             detailLabel.numberOfLines = 0
             detailLabel.font = detailLabel.font.withSize(12)
-            detailLabel.text = artwork.subtitle
+            detailLabel.text = currentAnnotation.subtitle
             detailCalloutAccessoryView = detailLabel
             
             // custom
             let rightButton1 = UIButton(type: .detailDisclosure)
-            let rightButton2 = UIButton(type: .contactAdd)
-            rightButton1.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-            rightButton2.frame = CGRect(x: 30, y: 0, width: 30, height: 30)
+            let rightButton2 = UIButton()
             let myRightView = UIView()
-//        let stackView = UIStackView()
-//        stackView.addArrangedSubview(rightButton1)
-//        stackView.addArrangedSubview(rightButton2)
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
-//        stackView.axis = .horizontal
-//        stackView.alignment = .top
-//        stackView.spacing = 6
-            myRightView.frame = CGRect(x: 0, y: 0, width: 60, height: 30)
+            
+            rightButton1.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            rightButton2.setBackgroundImage(#imageLiteral(resourceName: "Map"), for: .normal)
+            rightButton2.frame = CGRect(x: 30, y: 0, width: 48, height: 48)
+            rightButton1.center.y = rightButton2.center.y
+            
+            myRightView.frame = CGRect(x: 0, y: 0, width: 78, height: 48)
             myRightView.addSubview(rightButton1)
             myRightView.addSubview(rightButton2)
             rightCalloutAccessoryView = myRightView
@@ -121,6 +116,7 @@ class AnnotationView: MKAnnotationView {
     }
     
     @objc func button2DidClick() {
-        
+        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
+        currentAnnotation.mapItem?.openInMaps(launchOptions: launchOptions)
     }
 }
