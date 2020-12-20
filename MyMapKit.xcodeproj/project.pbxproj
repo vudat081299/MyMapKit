@@ -61,9 +61,21 @@
 		6B894B89258DDE3C00020EFD /* AnnotationImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B894B87258DDE3C00020EFD /* AnnotationImageCell.xib */; };
 		6B894B92258E338400020EFD /* UltravisualLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B894B91258E338400020EFD /* UltravisualLayout.swift */; };
 		6B894BA3258E4C3000020EFD /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B894BA2258E4C3000020EFD /* GradientView.swift */; };
-		6B894BC5258E5E6F00020EFD /* SignUpCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B894BC3258E5E6F00020EFD /* SignUpCollectionViewCell.swift */; };
-		6B894BC6258E5E6F00020EFD /* SignUpCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B894BC4258E5E6F00020EFD /* SignUpCollectionViewCell.xib */; };
 		6B894BCB258E637C00020EFD /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B894BCA258E637C00020EFD /* SignUpViewController.swift */; };
+		6B894BD2258F116700020EFD /* UploadAnnotationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B894BD0258F116600020EFD /* UploadAnnotationViewController.swift */; };
+		6B894BD3258F116700020EFD /* UploadAnnotationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B894BD1258F116600020EFD /* UploadAnnotationViewController.xib */; };
+		6B894BDC258F159600020EFD /* UploadAnnoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B894BDA258F159600020EFD /* UploadAnnoTableViewCell.swift */; };
+		6B894BDD258F159600020EFD /* UploadAnnoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B894BDB258F159600020EFD /* UploadAnnoTableViewCell.xib */; };
+		6B894BE6258F246E00020EFD /* PickTypePlaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B894BE4258F246E00020EFD /* PickTypePlaceTableViewCell.swift */; };
+		6B894BE7258F246E00020EFD /* PickTypePlaceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B894BE5258F246E00020EFD /* PickTypePlaceTableViewCell.xib */; };
+		6B894BF0258F2A4E00020EFD /* ImagesAnnotationViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B894BEE258F2A4E00020EFD /* ImagesAnnotationViewCell.swift */; };
+		6B894BF1258F2A4E00020EFD /* ImagesAnnotationViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B894BEF258F2A4E00020EFD /* ImagesAnnotationViewCell.xib */; };
+		6B894BF7258F2AA200020EFD /* ImagesAnnotationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B894BF5258F2AA200020EFD /* ImagesAnnotationCollectionViewCell.swift */; };
+		6B894BF8258F2AA200020EFD /* ImagesAnnotationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B894BF6258F2AA200020EFD /* ImagesAnnotationCollectionViewCell.xib */; };
+		6B894BFD258F3D2B00020EFD /* ImageAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B894BFC258F3D2B00020EFD /* ImageAnnotation.swift */; };
+		6B894C05258F3D4000020EFD /* ImageAnnotation.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B894C04258F3D4000020EFD /* ImageAnnotation.xib */; };
+		6B894C0B258F419300020EFD /* ViewImageCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B894C09258F419300020EFD /* ViewImageCellTableViewCell.swift */; };
+		6B894C0C258F419300020EFD /* ViewImageCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B894C0A258F419300020EFD /* ViewImageCellTableViewCell.xib */; };
 		6BF7B39A2582891F0093BA45 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF7B3992582891F0093BA45 /* AppDelegate.swift */; };
 		6BF7B39C2582891F0093BA45 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF7B39B2582891F0093BA45 /* SceneDelegate.swift */; };
 		6BF7B39E2582891F0093BA45 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF7B39D2582891F0093BA45 /* ViewController.swift */; };
@@ -152,9 +164,21 @@
 		6B894B87258DDE3C00020EFD /* AnnotationImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnnotationImageCell.xib; sourceTree = "<group>"; };
 		6B894B91258E338400020EFD /* UltravisualLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UltravisualLayout.swift; sourceTree = "<group>"; };
 		6B894BA2258E4C3000020EFD /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
-		6B894BC3258E5E6F00020EFD /* SignUpCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCollectionViewCell.swift; sourceTree = "<group>"; };
-		6B894BC4258E5E6F00020EFD /* SignUpCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpCollectionViewCell.xib; sourceTree = "<group>"; };
 		6B894BCA258E637C00020EFD /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		6B894BD0258F116600020EFD /* UploadAnnotationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAnnotationViewController.swift; sourceTree = "<group>"; };
+		6B894BD1258F116600020EFD /* UploadAnnotationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UploadAnnotationViewController.xib; sourceTree = "<group>"; };
+		6B894BDA258F159600020EFD /* UploadAnnoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAnnoTableViewCell.swift; sourceTree = "<group>"; };
+		6B894BDB258F159600020EFD /* UploadAnnoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UploadAnnoTableViewCell.xib; sourceTree = "<group>"; };
+		6B894BE4258F246E00020EFD /* PickTypePlaceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickTypePlaceTableViewCell.swift; sourceTree = "<group>"; };
+		6B894BE5258F246E00020EFD /* PickTypePlaceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickTypePlaceTableViewCell.xib; sourceTree = "<group>"; };
+		6B894BEE258F2A4E00020EFD /* ImagesAnnotationViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesAnnotationViewCell.swift; sourceTree = "<group>"; };
+		6B894BEF258F2A4E00020EFD /* ImagesAnnotationViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagesAnnotationViewCell.xib; sourceTree = "<group>"; };
+		6B894BF5258F2AA200020EFD /* ImagesAnnotationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesAnnotationCollectionViewCell.swift; sourceTree = "<group>"; };
+		6B894BF6258F2AA200020EFD /* ImagesAnnotationCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagesAnnotationCollectionViewCell.xib; sourceTree = "<group>"; };
+		6B894BFC258F3D2B00020EFD /* ImageAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAnnotation.swift; sourceTree = "<group>"; };
+		6B894C04258F3D4000020EFD /* ImageAnnotation.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageAnnotation.xib; sourceTree = "<group>"; };
+		6B894C09258F419300020EFD /* ViewImageCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewImageCellTableViewCell.swift; sourceTree = "<group>"; };
+		6B894C0A258F419300020EFD /* ViewImageCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewImageCellTableViewCell.xib; sourceTree = "<group>"; };
 		6BF7B3962582891F0093BA45 /* MyMapKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMapKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BF7B3992582891F0093BA45 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6BF7B39B2582891F0093BA45 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -232,8 +256,6 @@
 			children = (
 				6B816A34258B619D00092325 /* UserAccessControlViewController.swift */,
 				6B894BCA258E637C00020EFD /* SignUpViewController.swift */,
-				6B894BC3258E5E6F00020EFD /* SignUpCollectionViewCell.swift */,
-				6B894BC4258E5E6F00020EFD /* SignUpCollectionViewCell.xib */,
 			);
 			path = AccessControl;
 			sourceTree = "<group>";
@@ -329,6 +351,27 @@
 			path = AnnotationDetail;
 			sourceTree = "<group>";
 		};
+		6B894BCF258F114B00020EFD /* UploadAnnotation */ = {
+			isa = PBXGroup;
+			children = (
+				6B894BD0258F116600020EFD /* UploadAnnotationViewController.swift */,
+				6B894BD1258F116600020EFD /* UploadAnnotationViewController.xib */,
+				6B894BDA258F159600020EFD /* UploadAnnoTableViewCell.swift */,
+				6B894BDB258F159600020EFD /* UploadAnnoTableViewCell.xib */,
+				6B894C09258F419300020EFD /* ViewImageCellTableViewCell.swift */,
+				6B894C0A258F419300020EFD /* ViewImageCellTableViewCell.xib */,
+				6B894BFC258F3D2B00020EFD /* ImageAnnotation.swift */,
+				6B894C04258F3D4000020EFD /* ImageAnnotation.xib */,
+				6B894BE4258F246E00020EFD /* PickTypePlaceTableViewCell.swift */,
+				6B894BE5258F246E00020EFD /* PickTypePlaceTableViewCell.xib */,
+				6B894BEE258F2A4E00020EFD /* ImagesAnnotationViewCell.swift */,
+				6B894BEF258F2A4E00020EFD /* ImagesAnnotationViewCell.xib */,
+				6B894BF5258F2AA200020EFD /* ImagesAnnotationCollectionViewCell.swift */,
+				6B894BF6258F2AA200020EFD /* ImagesAnnotationCollectionViewCell.xib */,
+			);
+			path = UploadAnnotation;
+			sourceTree = "<group>";
+		};
 		6BF7B38D2582891F0093BA45 = {
 			isa = PBXGroup;
 			children = (
@@ -363,6 +406,7 @@
 				6B69D4A725852CF300E7B625 /* AnnotationsFactory */,
 				6B816A28258B611100092325 /* AccessControl */,
 				6B894B76258D7D5400020EFD /* UserInfo */,
+				6B894BCF258F114B00020EFD /* UploadAnnotation */,
 				6B894B7D258DDAD500020EFD /* AnnotationDetail */,
 				6BF7B39D2582891F0093BA45 /* ViewController.swift */,
 				6B816A3C258B9AC300092325 /* Main.storyboard */,
@@ -566,8 +610,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B69D48925836C4400E7B625 /* Annotation.geojson in Resources */,
-				6B894BC6258E5E6F00020EFD /* SignUpCollectionViewCell.xib in Resources */,
+				6B894BDD258F159600020EFD /* UploadAnnoTableViewCell.xib in Resources */,
+				6B894C05258F3D4000020EFD /* ImageAnnotation.xib in Resources */,
+				6B894C0C258F419300020EFD /* ViewImageCellTableViewCell.xib in Resources */,
+				6B894BD3258F116700020EFD /* UploadAnnotationViewController.xib in Resources */,
 				6B894B89258DDE3C00020EFD /* AnnotationImageCell.xib in Resources */,
+				6B894BE7258F246E00020EFD /* PickTypePlaceTableViewCell.xib in Resources */,
+				6B894BF1258F2A4E00020EFD /* ImagesAnnotationViewCell.xib in Resources */,
+				6B894BF8258F2AA200020EFD /* ImagesAnnotationCollectionViewCell.xib in Resources */,
 				6BF7B3A9258289220093BA45 /* LaunchScreen.storyboard in Resources */,
 				6B894B72258D7D4300020EFD /* AnnotationCell.xib in Resources */,
 				6BF7B3A6258289220093BA45 /* Assets.xcassets in Resources */,
@@ -599,13 +649,15 @@
 				6B816A6F258BBB6200092325 /* NVActivityIndicatorShape.swift in Sources */,
 				6B69D49E25852B2100E7B625 /* CapturedImageView.swift in Sources */,
 				6B894BA3258E4C3000020EFD /* GradientView.swift in Sources */,
+				6B894BF7258F2AA200020EFD /* ImagesAnnotationCollectionViewCell.swift in Sources */,
+				6B894C0B258F419300020EFD /* ViewImageCellTableViewCell.swift in Sources */,
 				6BF7B3EE25828D190093BA45 /* ErrorControl.swift in Sources */,
 				6B816A6E258BBB6200092325 /* NVActivityIndicatorAnimationDelegate.swift in Sources */,
-				6B894BC5258E5E6F00020EFD /* SignUpCollectionViewCell.swift in Sources */,
 				6B894B7F258DDAFA00020EFD /* AnnotatitionViewController.swift in Sources */,
 				6B816A81258BBB6200092325 /* NVActivityIndicatorAnimationBallRotateChase.swift in Sources */,
 				6BF7B39E2582891F0093BA45 /* ViewController.swift in Sources */,
 				6B816A73258BBB6200092325 /* NVActivityIndicatorAnimationBallClipRotate.swift in Sources */,
+				6B894BF0258F2A4E00020EFD /* ImagesAnnotationViewCell.swift in Sources */,
 				6B816A7A258BBB6200092325 /* NVActivityIndicatorAnimationBallScale.swift in Sources */,
 				6BF7B3DF25828C190093BA45 /* File.swift in Sources */,
 				6B816A8C258BBB6200092325 /* NVActivityIndicatorAnimationBallPulseSync.swift in Sources */,
@@ -621,6 +673,7 @@
 				6B816A35258B619D00092325 /* UserAccessControlViewController.swift in Sources */,
 				6B816A8B258BBB6200092325 /* NVActivityIndicatorAnimationPacman.swift in Sources */,
 				6B816A86258BBB6200092325 /* NVActivityIndicatorAnimationTriangleSkewSpin.swift in Sources */,
+				6B894BE6258F246E00020EFD /* PickTypePlaceTableViewCell.swift in Sources */,
 				6B816A7E258BBB6200092325 /* NVActivityIndicatorAnimationBallScaleRipple.swift in Sources */,
 				6B816A92258BBB6200092325 /* NVActivityIndicatorAnimationOrbit.swift in Sources */,
 				6B894B92258E338400020EFD /* UltravisualLayout.swift in Sources */,
@@ -628,6 +681,7 @@
 				6B894B55258CFE1E00020EFD /* UserDetailViewController.swift in Sources */,
 				6B816A91258BBB6200092325 /* NVActivityIndicatorAnimationBallPulseRise.swift in Sources */,
 				6B816A78258BBB6200092325 /* NVActivityIndicatorAnimationLineSpinFadeLoader.swift in Sources */,
+				6B894BD2258F116700020EFD /* UploadAnnotationViewController.swift in Sources */,
 				6B816A76258BBB6200092325 /* NVActivityIndicatorAnimationBallDoubleBounce.swift in Sources */,
 				6B816A85258BBB6200092325 /* NVActivityIndicatorAnimationAudioEqualizer.swift in Sources */,
 				6B816A80258BBB6200092325 /* NVActivityIndicatorAnimationSquareSpin.swift in Sources */,
@@ -639,6 +693,7 @@
 				6B894B48258CF96F00020EFD /* UIView.swift in Sources */,
 				6B816A70258BBB6200092325 /* NVActivityIndicatorView.swift in Sources */,
 				6B69D49925852A0700E7B625 /* CapturePhoto.swift in Sources */,
+				6B894BDC258F159600020EFD /* UploadAnnoTableViewCell.swift in Sources */,
 				6B816A75258BBB6200092325 /* NVActivityIndicatorAnimationBallTrianglePath.swift in Sources */,
 				6B816A87258BBB6200092325 /* NVActivityIndicatorAnimationBallGridBeat.swift in Sources */,
 				6B816A88258BBB6200092325 /* NVActivityIndicatorAnimationBallScaleMultiple.swift in Sources */,
@@ -653,6 +708,7 @@
 				6B816A83258BBB6200092325 /* NVActivityIndicatorAnimationBlank.swift in Sources */,
 				6B816A8E258BBB6200092325 /* NVActivityIndicatorAnimationBallSpinFadeLoader.swift in Sources */,
 				6BF7B3FD25828F0E0093BA45 /* AnnotationView.swift in Sources */,
+				6B894BFD258F3D2B00020EFD /* ImageAnnotation.swift in Sources */,
 				6B894B88258DDE3C00020EFD /* AnnotationImageCell.swift in Sources */,
 				6BF7B3F525828EF00093BA45 /* Annotation.swift in Sources */,
 				6B894B71258D7D4300020EFD /* AnnotationCell.swift in Sources */,

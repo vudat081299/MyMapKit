@@ -7,55 +7,119 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class SignUpViewController: UIViewController {
 
-    @IBOutlet weak var listInputCollectionView: UICollectionView!
     @IBOutlet weak var gradienBg: Gradient!
+    
+    @IBOutlet weak var scrollInputView: UIScrollView!
     
     @IBOutlet weak var progressView: UIView!
     @IBOutlet weak var currentProgressDot: UIView!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var imageBg: UIImageView!
     
-    var inputTitle = ["Your full name", "Username", "Phone number", "Email", "Password", "Confirm password"]
+    @IBOutlet weak var fullname: UITextField!
+    @IBOutlet weak var username: UITextField!
+    @IBOutlet weak var phonenumber: UITextField!
+    @IBOutlet weak var email: UITextField!
+    @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var confirmpassword: UITextField!
+    
+    @IBOutlet weak var fn1: UIView!
+    @IBOutlet weak var fn2: UIView!
+    @IBOutlet weak var un1: UIView!
+    @IBOutlet weak var un2: UIView!
+    @IBOutlet weak var pn1: UIView!
+    @IBOutlet weak var pn2: UIView!
+    @IBOutlet weak var em1: UIView!
+    @IBOutlet weak var em2: UIView!
+    @IBOutlet weak var pw1: UIView!
+    @IBOutlet weak var pw2: UIView!
+    @IBOutlet weak var cp1: UIView!
+    @IBOutlet weak var cp2: UIView!
+    @IBOutlet weak var bt1: UIButton!
+    @IBOutlet weak var bt2: UIButton!
+    @IBOutlet weak var bt3: UIButton!
+    @IBOutlet weak var bt4: UIButton!
+    @IBOutlet weak var bt5: UIButton!
     
     let x = UIImage(named: "x")?.withRenderingMode(.alwaysTemplate)
     var lastContentOffset: CGFloat! = 0
+    var satelliteSize: CGFloat = 0.0
+    var inputTitle = ["Your full name", "Username", "Phone number", "Email", "Password", "Confirm password"]
+    var viewList: [UIView]!
+    var buttonList: [UIButton]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // data
+        viewList = [fn1, un1, pn1, em1, pw1, cp1, fn2, un2, pn2, em2, pw2, cp2]
+        buttonList = [bt1, bt2, bt3, bt4, bt5]
 
         // Do any additional setup after loading the view.
-        self.listInputCollectionView.register(UINib(nibName: "SignUpCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SignUpCollectionViewCell")
         progressView.minEdgeBorder()
         currentProgressDot.roundedBorder()
-            backButton.setImage(x, for: .normal)
+        backButton.setImage(x, for: .normal)
         backButton.tintColor = .white
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return inputTitle.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: SignUpCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SignUpCollectionViewCell", for: indexPath) as! SignUpCollectionViewCell
-        cell.title.text = inputTitle[indexPath.row]
         
-        return cell
+        setupAnimationBg()
+        setUpView()
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func setUpView() {
+        borderAllViewIn(viewList)
+        setUpButton(buttonList)
+    }
+    
+    func borderAllViewIn(_ array: [UIView]) {
+        for (index, value) in array.enumerated() {
+            value.border()
+            if index > 5 {
+                value.dropShadow()
+            }
+        }
+    }
+    
+    func setUpButton(_ array: [UIButton]) {
+        let rightArrow = UIImage(named: ">")?.withRenderingMode(.alwaysTemplate)
+        for value in array {
+            value.setImage(rightArrow, for: .normal)
+            value.tintColor = .darkGray
+        }
+    }
+    
+    func setupAnimationBg() {
+//            let duration: CFTimeInterval = 30
+//
+//            // Animation
+//            let animation = CAKeyframeAnimation(keyPath: "transform.rotation.z")
+//
+//            animation.keyTimes = [0, 0.5, 1]
+//            animation.values = [0, -Double.pi, -2 * Double.pi]
+//            animation.duration = duration
+//            animation.repeatCount = HUGE
+//            animation.isRemovedOnCompletion = false
+//
+//        imageBg.layer.add(animation, forKey: "animation")
         
-        return CGSize(width: self.view.frame.size.width, height: 300)
+        
+            // Rotate animation
+            let rotateAnimation = CAKeyframeAnimation(keyPath: "position")
+
+        rotateAnimation.path = UIBezierPath(arcCenter: CGPoint(x: view.frame.size.width / 2, y: imageBg.frame.size.height / 2),
+                                                radius: (view.frame.size.width - satelliteSize) / 2 + 50,
+                                                startAngle: CGFloat(Double.pi * 1.5),
+                                                endAngle: CGFloat(Double.pi * 1.5 + 4 * Double.pi),
+                                                clockwise: true).cgPath
+            rotateAnimation.duration = 60 * 2
+            rotateAnimation.repeatCount = HUGE
+            rotateAnimation.isRemovedOnCompletion = false
+
+            imageBg.layer.add(rotateAnimation, forKey: "animation")
 
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.0
-    }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.0
-    }
     /*
     // MARK: - Navigation
 
@@ -69,6 +133,24 @@ class SignUpViewController: UIViewController, UICollectionViewDelegate, UICollec
         navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func bt1Action(_ sender: UIButton) {
+    
+    }
+    @IBAction func bt2Action(_ sender: UIButton) {
+    
+    }
+    @IBAction func bt3Action(_ sender: UIButton) {
+    
+    }
+    @IBAction func bt4Action(_ sender: UIButton) {
+    
+    }
+    @IBAction func bt5Action(_ sender: UIButton) {
+    
+    }
+    @IBAction func bt6Action(_ sender: UIButton) {
+    
+    }
 }
 
 extension SignUpViewController: UIScrollViewDelegate {
@@ -91,7 +173,7 @@ extension SignUpViewController: UIScrollViewDelegate {
 //    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.x < -100.0 {
+        if scrollView.tag == 1 && scrollView.contentOffset.x < -15.0 {
             navigationController?.popViewController(animated: true)
         }
 //        if (2.2 > scrollView.contentOffset.x) {

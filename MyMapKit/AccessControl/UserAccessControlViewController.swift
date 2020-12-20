@@ -86,7 +86,7 @@ class UserAccessControlViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func stopLoadingAnimation () {
-        UIView.animate(withDuration: 0.5,
+        UIView.animate(withDuration: 1,
                        delay: 0.5,
                        options: [.curveEaseIn],
                        animations: { [weak self] in
@@ -131,6 +131,10 @@ class UserAccessControlViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func endTypingPassword(_ sender: UITextField) {
+        
+    }
+    
+    @IBAction func logout(_ unwindSegue: UIStoryboardSegue) {
         
     }
     

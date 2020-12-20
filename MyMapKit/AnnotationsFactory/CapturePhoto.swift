@@ -10,6 +10,7 @@ import AVFoundation
 
 class CapturePhoto: UIViewController {
     
+    @IBOutlet weak var uploadButton: UIButton!
     @IBOutlet weak var switchCameraButton: UIButton!
     @IBOutlet weak var shadow: UIView!
     @IBOutlet weak var captureImageButton: UIButton!
@@ -35,6 +36,7 @@ class CapturePhoto: UIViewController {
     var isFirstCap = true
 
     let image = UIImage(named: "switchcamera")?.withRenderingMode(.alwaysTemplate)
+    var listCapturedImage = [UIImage]()
 //    let imageCapture = UIImage(named: "capture")?.withRenderingMode(.alwaysTemplate)
 
     //MARK:- View Components
@@ -53,6 +55,8 @@ class CapturePhoto: UIViewController {
     }
     
     func setUpViewElementOnCamera() {
+        uploadButton.isEnabled = true
+        
         switchCameraButton.setImage(image, for: .normal)
         switchCameraButton.tintColor = .white
         switchCameraButton.translatesAutoresizingMaskIntoConstraints = false
@@ -208,7 +212,6 @@ class CapturePhoto: UIViewController {
                             self?.view.layoutIfNeeded()
                            }, completion: nil)
         }
-        
         tapticFeedBack()
         takePicture = true
     }
@@ -229,6 +232,12 @@ class CapturePhoto: UIViewController {
         }
     }
     
+    @IBAction func uploadDestination(_ sender: UIButton) {
+        if listCapturedImage.count == 0 { return }
+        let uploadView: UploadAnnotationViewController = UploadAnnotationViewController(nibName: "UploadAnnotationViewController", bundle: nil)
+        uploadView.listCapturedImage = listCapturedImage
+        show(uploadView, sender: self)
+    }
     @IBAction func backPreviousView(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }
@@ -265,9 +274,11 @@ extension CapturePhoto: AVCaptureVideoDataOutputSampleBufferDelegate {
         //get UIImage out of CIImage
         let uiImage = UIImage(ciImage: ciImage)
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [self] in
 //            self.capturedImageView.image = uiImage.resized(toWidth: 300.0)
             self.capturedImageView.image = uiImage
+            self.listCapturedImage.append(uiImage)
+            self.uploadButton.isEnabled = true
             self.takePicture = false
         }
     }
