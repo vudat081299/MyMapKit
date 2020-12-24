@@ -14,6 +14,11 @@ enum GetResourcesRequest<ResourceType> {
   case failure
 }
 
+enum GetAnnotationRequest {
+  case success(Data)
+  case failure
+}
+
 enum SaveResult<ResourceType> {
   case success(ResourceType)
   case failure
@@ -32,23 +37,40 @@ struct ResourceRequest<ResourceType> where ResourceType: Codable {
     self.resourceURL = resourceURL.appendingPathComponent(resourcePath)
   }
 
-  func getAll(completion: @escaping (GetResourcesRequest<ResourceType>) -> Void) {
-    let dataTask = URLSession.shared.dataTask(with: resourceURL) { (data, response, error) in
-      guard let jsonData = data else {
-        completion(.failure)
-        return
-      }
+    func getAll(completion: @escaping (GetResourcesRequest<ResourceType>) -> Void) {
+      let dataTask = URLSession.shared.dataTask(with: resourceURL) { (data, response, error) in
+        guard let jsonData = data else {
+          completion(.failure)
+          return
+        }
 
-      do {
-        let decoder = JSONDecoder()
-        let resources: [ResourceType] = try decoder.decode([ResourceType].self, from: jsonData)
-        completion(.success(resources))
-      } catch {
-        completion(.failure)
+        do {
+          let decoder = JSONDecoder()
+          let resources: [ResourceType] = try decoder.decode([ResourceType].self, from: jsonData)
+          completion(.success(resources))
+        } catch {
+          completion(.failure)
+        }
       }
+      dataTask.resume()
     }
-    dataTask.resume()
-  }
+    func getAllAnnotations(completion: @escaping (GetAnnotationRequest) -> Void) {
+      let dataTask = URLSession.shared.dataTask(with: resourceURL) { (data, response, error) in
+        guard let jsonData = data else {
+          completion(.failure)
+          return
+        }
+
+        do {
+//          let decoder = JSONDecoder()
+//          let resources: [ResourceType] = try decoder.decode([ResourceType].self, from: jsonData)
+          completion(.success(jsonData))
+        } catch {
+          completion(.failure)
+        }
+      }
+      dataTask.resume()
+    }
 
   func save(_ resourceToSave: ResourceType, completion: @escaping (SaveResult<ResourceType>) -> Void) {
     do {

@@ -12,6 +12,7 @@ import Contacts
 class Annotation: NSObject, MKAnnotation {
     let title: String?
     let mySubTitle: String?
+    let annoDescription: String?
     let discipline: String?
     let coordinate: CLLocationCoordinate2D
     let type: String?
@@ -21,6 +22,7 @@ class Annotation: NSObject, MKAnnotation {
   
   init(
     title: String?,
+    annoDescription: String?,
     locationName: String?,
     discipline: String?,
     coordinate: CLLocationCoordinate2D,
@@ -31,6 +33,7 @@ class Annotation: NSObject, MKAnnotation {
   ) {
     self.title = title
     self.mySubTitle = locationName
+    self.annoDescription = annoDescription
     self.discipline = discipline
     self.coordinate = coordinate
     self.type = type
@@ -55,8 +58,9 @@ class Annotation: NSObject, MKAnnotation {
     
     // 3
     title = (properties["title"] as? String) ?? "Updating name..."
-    mySubTitle = (properties["subTitle"] as? String) ?? "Updating description..."
-    discipline = (properties["type"] as? String) ?? "Mural"
+    mySubTitle = (properties["subTitle"] as? String) ?? "Updating..."
+    annoDescription = (properties["description"] as? String) ?? "Updating description..."
+    discipline = "Mural"
     coordinate = point.coordinate
     type = (properties["type"] as? String) ?? "Mural"
     imageNote = (properties["imageNote"] as? String) ?? "Mural"

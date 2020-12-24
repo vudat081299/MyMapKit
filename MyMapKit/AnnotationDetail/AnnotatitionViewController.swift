@@ -14,6 +14,15 @@ class AnnotatitionViewController: UIViewController, UICollectionViewDataSource, 
     var annotationList = [1, 2, 3]
     var CellWidth = 0.0
     
+    var annoTitle: String!
+    var mySubTitle: String!
+    var annoDescription: String!
+    var discipline: String!
+    var type: String!
+    var imageNote: String!
+    var country: String!
+    var city: String!
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return annotationList.count
     }
