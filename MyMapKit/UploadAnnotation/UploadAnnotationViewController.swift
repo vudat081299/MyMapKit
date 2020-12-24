@@ -9,19 +9,18 @@ import UIKit
 import CoreLocation
 
 enum TypeAnnotation: Int, CaseIterable {
-    case restaurant, coffeShop, clothesShop, pharmacy, superMaket
+    case publibPlace, restaurant, coffeShop, clothesShop, pharmacy, superMaket
 }
 
-let typeAnnotationText = ["Restaurant", "Coffe Shop", "Clothes Shop", "Pharmacy", "Super Maket"]
+let typeAnnotationText = ["Public place", "Restaurant", "Coffe Shop", "Clothes Shop", "Pharmacy", "Super Maket"]
 
 struct UploadAnnotationData {
-    var title = "Loading title"
-    var subTitle = ""
-    var description = ""
+    var title = "a"
+    var subTitle = "a"
+    var description = "a"
     var type: TypeAnnotation?
-    var imageNote: [String]?
+    var imageNote: [String]? = ["a"]
     var image: [File]?
-    
     var lat: CLLocationDegrees {
         get {
             return ViewController.userLocationVal.coordinate.latitude
@@ -70,9 +69,11 @@ struct UploadAnnotationData {
     }
 }
 
-let uploadAnnotationData = UploadAnnotationData()
+var uploadAnnotationData = UploadAnnotationData()
 
 class UploadAnnotationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    var keyboardHeight: CGFloat = 0.0
     
     @IBOutlet weak var inputTableView: UITableView!
     @IBOutlet weak var csBottomTableView: NSLayoutConstraint!
@@ -80,41 +81,43 @@ class UploadAnnotationViewController: UIViewController, UITableViewDelegate, UIT
     var listCapturedImage: [UIImage]?
     
     var inputFieldText = ["Location name", "Note", "Description"]
-    var placeholderInputFieldText = ["Ha noi ..v", "address or something special", "your review"]
+    var placeholderInputFieldText = ["Ha Noi ..v", "address or something special", "your review"]
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 4
+            return 3
         } else if section == 1 {
-            return 0
+            return listCapturedImage!.count
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 3 {
-            let cell = UITableViewCell()
-
-            
-            let uploadView: ImageAnnotation = ImageAnnotation(nibName: "ImageAnnotation", bundle: nil)
-            uploadView.imageArray = listCapturedImage
-            cell.contentView.addSubview(uploadView.view)
-            return cell
-        } else {
+        if indexPath.section == 0 {
             let cell: UploadAnnoTableViewCell = tableView.dequeueReusableCell(withIdentifier: "UploadAnnoTableViewCell", for: indexPath) as! UploadAnnoTableViewCell
             cell.indexPath = indexPath
             cell.title.text = inputFieldText[indexPath.row]
             cell.textInput.placeholder = placeholderInputFieldText[indexPath.row]
             return cell
+        } else if indexPath.section == 1 {
+            let cell: ViewImageCellTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ViewImageCellTableViewCell", for: indexPath) as! ViewImageCellTableViewCell
+            
+            cell.imageAnno.image = listCapturedImage![indexPath.row]
+            cell.imageAnno.border()
+            cell.layerImageView.dropShadow()
+            cell.textInput.placeholder = "Enter your review"
+            return cell
         }
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return "Information about this place"
-        } else {
-            return ""
+        } else if section == 1 {
+            return "Review for every pictures you did take"
         }
+        return ""
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -128,15 +131,20 @@ class UploadAnnotationViewController: UIViewController, UITableViewDelegate, UIT
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        uploadAnnotationData = UploadAnnotationData()
 
         // Do any additional setup after loading the view.
         self.inputTableView.register(UINib(nibName: "UploadAnnoTableViewCell", bundle: nil), forCellReuseIdentifier: "UploadAnnoTableViewCell")
-        self.inputTableView.register(UINib(nibName: "UITableViewCell", bundle: nil), forCellReuseIdentifier: "UITableViewCell")
+        self.inputTableView.register(UINib(nibName: "ViewImageCellTableViewCell", bundle: nil), forCellReuseIdentifier: "ViewImageCellTableViewCell")
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 3 {
+        if indexPath.section == 0 {
+            return 60
+        } else if indexPath.section == 1 {
             return 150
         }
         return 60
@@ -144,6 +152,24 @@ class UploadAnnotationViewController: UIViewController, UITableViewDelegate, UIT
 
     @IBAction func backAction(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
+    }
+    @IBAction func uploadAnnotationToServer(_ sender: UIButton) {
+        var file = [File] ()
+        for (index, value) in listCapturedImage!.enumerated() {
+            file.append(File(data: value.pngData()!, filename: "\(index)"))
+        }
+        let user = AnnotationUpload(title: uploadAnnotationData.title, subTitle: uploadAnnotationData.subTitle, latitude: String(ViewController.userLocationVal.coordinate.latitude), longitude: String(ViewController.userLocationVal.coordinate.longitude), description: uploadAnnotationData.description, imageNote: uploadAnnotationData.imageNote!, image: file)
+        ResourceRequest<AnnotationUpload>(resourcePath: "annotations").save(user) { [weak self] result in
+            switch result {
+            case .failure:
+                print("upload fail")
+            case .success:
+                DispatchQueue.main.async { [weak self] in
+                    print("successful created annotation!")
+                }
+            }
+        }
+        
     }
     
     
@@ -159,3 +185,36 @@ class UploadAnnotationViewController: UIViewController, UITableViewDelegate, UIT
     */
 
 }
+
+//MARK: Keyboard.
+extension UploadAnnotationViewController: UITextFieldDelegate {
+    @objc func keyboardWillShow(_ notification: NSNotification) {
+        if let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            keyboardHeight = keyboardRect.height
+            UIView.animate(withDuration: 0.3,
+                           delay: 0.1,
+                           options: [.curveEaseIn],
+                           animations: { [weak self] in
+                            self?.csBottomTableView.constant = self!.keyboardHeight
+                           }, completion: nil)
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        
+        UIView.animate(withDuration: 0.3,
+                       delay: 0.1,
+                       options: [.curveEaseIn],
+                       animations: { [weak self] in
+                        self?.csBottomTableView.constant = 0
+                       }, completion: nil)
+        view.layoutIfNeeded()
+//            if let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+//                UIView.animate(withDuration: 0.3,
+//                               delay: 0.1,
+//                               options: [.curveEaseIn],
+//                               animations: { [weak self] in
+//                               }, completion: nil)
+    }
+}
+

@@ -217,19 +217,6 @@ class CapturePhoto: UIViewController {
     }
     
     @IBAction func upload(_ sender: UIBarButtonItem) {
-        let user = AnnotationUpload(name: "Test", description: "Test", latitude: String(ViewController.userLocationVal.coordinate.latitude), longitude: String(ViewController.userLocationVal.coordinate.longitude), file: File(data: (self.capturedImageView.image?.pngData())!, filename: "test"))
-        ResourceRequest<AnnotationUpload>(resourcePath: "annotations").save(user) { [weak self] result in
-          switch result {
-          case .failure:
-//            ErrorPresenter.showError(message: "There was a problem saving the data!", on: self)
-            print("upload fail")
-          case .success:
-            DispatchQueue.main.async { [weak self] in
-                print("successful created annotation!")
-//              self?.navigationController?.popViewController(animated: true)
-            }
-          }
-        }
     }
     
     @IBAction func uploadDestination(_ sender: UIButton) {
@@ -277,7 +264,12 @@ extension CapturePhoto: AVCaptureVideoDataOutputSampleBufferDelegate {
         DispatchQueue.main.async { [self] in
 //            self.capturedImageView.image = uiImage.resized(toWidth: 300.0)
             self.capturedImageView.image = uiImage
-            self.listCapturedImage.append(uiImage)
+            if self.listCapturedImage.count < 2 {
+                self.listCapturedImage.append(uiImage)
+            } else {
+                self.listCapturedImage.remove(at: 0)
+                self.listCapturedImage.append(uiImage)
+            }
             self.uploadButton.isEnabled = true
             self.takePicture = false
         }

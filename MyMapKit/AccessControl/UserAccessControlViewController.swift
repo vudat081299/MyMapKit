@@ -105,9 +105,35 @@ class UserAccessControlViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func loginButtonTap(_ sender: UIButton) {
-        startLoading {
-            self.performSegue(withIdentifier: "didLogin", sender: nil)
+        guard let username = usernameTextField.text, !username.isEmpty else {
+            ErrorPresenter.showError(message: "Please enter your username", on: self)
+            return
         }
+        
+        guard let password = passwordTextField.text, !password.isEmpty else {
+            ErrorPresenter.showError(message: "Please enter your password", on: self)
+            return
+        }
+        
+        Auth().login(username: username, password: password) { result in
+            switch result {
+            case .success:
+                DispatchQueue.main.async { [self] in
+                    startLoading {
+                        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+                        appDelegate?.window?.rootViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateInitialViewController()
+                    }
+                }
+            case .failure:
+                let message = "Could not login. Check your credentials and try again"
+                ErrorPresenter.showError(message: message, on: self)
+            }
+        }
+        
+//        DidRequestServer.successful(on:self)
+//        startLoading {
+//            self.performSegue(withIdentifier: "didLogin", sender: nil)
+//        }
     }
     
     @IBAction func hideKeyBoardTap(_ sender: UITapGestureRecognizer) {
@@ -138,6 +164,9 @@ class UserAccessControlViewController: UIViewController, UIScrollViewDelegate {
         
     }
     
+    @IBAction func customIpAction(_ sender: UIButton) {
+        ip = usernameTextField.text!
+    }
     
     // MARK: Observer methods
     @objc func touchDragOutsidePageControl() {

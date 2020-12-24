@@ -7,6 +7,8 @@
 
 import Foundation
 
+var ip = "192.168.1.65:8080"
+
 enum GetResourcesRequest<ResourceType> {
   case success([ResourceType])
   case failure
@@ -19,7 +21,7 @@ enum SaveResult<ResourceType> {
 
 struct ResourceRequest<ResourceType> where ResourceType: Codable {
 
-  let baseURL = "http://192.168.1.65:8080/api/"
+  let baseURL = "http://\(ip)/api/"
   let resourceURL: URL
 
   init(resourcePath: String) {
@@ -58,20 +60,24 @@ struct ResourceRequest<ResourceType> where ResourceType: Codable {
         guard let httpResponse = response as? HTTPURLResponse,
           httpResponse.statusCode == 200,
           let jsonData = data else {
+            print(1)
             completion(.failure)
             return
         }
-
+        print(data)
+        print(response)
         do {
           let decoder = JSONDecoder()
           let resource = try decoder.decode(ResourceType.self, from: jsonData)
           completion(.success(resource))
         } catch {
+            print(2)
           completion(.failure)
         }
       }
       dataTask.resume()
     } catch {
+        print(3)
       completion(.failure)
     }
   }

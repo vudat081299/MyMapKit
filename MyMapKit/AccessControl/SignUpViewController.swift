@@ -43,18 +43,29 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var bt4: UIButton!
     @IBOutlet weak var bt5: UIButton!
     
+    @IBOutlet weak var layerBackButton: UIView!
+    @IBOutlet weak var layerConfirmButton: UIView!
+    
+    @IBOutlet weak var backStepButton: UIButton!
+    @IBOutlet weak var confirmButton: UIButton!
+    
     let x = UIImage(named: "x")?.withRenderingMode(.alwaysTemplate)
     var lastContentOffset: CGFloat! = 0
     var satelliteSize: CGFloat = 0.0
     var inputTitle = ["Your full name", "Username", "Phone number", "Email", "Password", "Confirm password"]
+    var inputTextList: [UITextField]!
     var viewList: [UIView]!
     var buttonList: [UIButton]!
+    var currentInputIndex = 0
+    
+    var createUserFormData = CreateUserFormData(name: "", username: "", password: "", email: "", phonenumber: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // data
-        viewList = [fn1, un1, pn1, em1, pw1, cp1, fn2, un2, pn2, em2, pw2, cp2]
+        viewList = [fn1, un1, pn1, em1, pw1, cp1, fn2, un2, pn2, em2, pw2, cp2, layerBackButton, layerConfirmButton, backStepButton, confirmButton]
         buttonList = [bt1, bt2, bt3, bt4, bt5]
+        inputTextList = [fullname, username, phonenumber, email, password, confirmpassword]
 
         // Do any additional setup after loading the view.
         progressView.minEdgeBorder()
@@ -64,11 +75,15 @@ class SignUpViewController: UIViewController {
         
         setupAnimationBg()
         setUpView()
+        fullname.becomeFirstResponder()
     }
     
     func setUpView() {
         borderAllViewIn(viewList)
         setUpButton(buttonList)
+        
+        backStepButton.isEnabled = false
+        backStepButton.setTitleColor(.lightGray, for: .disabled)
     }
     
     func borderAllViewIn(_ array: [UIView]) {
@@ -119,6 +134,72 @@ class SignUpViewController: UIViewController {
 
     }
     
+    // next
+    func setOffSet() {
+        switchResponder()
+        
+        backStepButton.isEnabled = true
+        
+        scrollInputView.setContentOffset(CGPoint(x: CGFloat(currentInputIndex) * view.frame.size.width, y:0), animated: true)
+        
+        UIView.animate(withDuration: 0.3,
+                       delay: 0.0,
+                       options: [.curveEaseIn],
+                       animations: { [weak self] in
+                        self!.currentProgressDot.frame.origin.x = self!.progressView.frame.origin.x + 3 + CGFloat(self!.currentInputIndex) * ((self!.progressView.frame.size.width - 6 - self!.currentProgressDot.frame.size.width) / 5)
+                        self?.view.layoutIfNeeded()
+                       }, completion: nil)
+
+    }
+    
+    // back
+    func setBackOffSet() {
+        switchResponder()
+        
+        scrollInputView.setContentOffset(CGPoint(x: CGFloat(currentInputIndex) * view.frame.size.width, y:0), animated: true)
+        
+        UIView.animate(withDuration: 0.3,
+                       delay: 0.0,
+                       options: [.curveEaseIn],
+                       animations: { [weak self] in
+                        self!.currentProgressDot.frame.origin.x = self!.progressView.frame.origin.x + 3 + CGFloat(self!.currentInputIndex) * ((self!.progressView.frame.size.width - 6 - self!.currentProgressDot.frame.size.width) / 5)
+                        self?.view.layoutIfNeeded()
+                       }, completion: nil)
+    }
+    
+    func switchResponder() {
+        switch currentInputIndex {
+        case 1:
+            username.becomeFirstResponder()
+        case 2:
+            phonenumber.becomeFirstResponder()
+        case 3:
+            email.becomeFirstResponder()
+        case 4:
+            password.becomeFirstResponder()
+        case 5:
+            confirmpassword.becomeFirstResponder()
+        default:
+            fullname.becomeFirstResponder()
+        }
+    }
+    
+    func validateInput() -> Bool {
+        for i in inputTextList {
+            if i.text == "" || i.text == nil {
+                MessagePresenter.showMessage(message: "Please fill completely in all fields!", on: self)
+                return false
+            }
+        }
+        if password.text != confirmpassword.text {
+            MessagePresenter.showMessage(message: "Confirmed password didn't match!", on: self)
+            return false
+        }
+        let accountForm = CreateUserFormData(name: fullname.text!, username: username.text!, password: password.text!, email: email.text!, phonenumber: phonenumber.text!)
+        createUserFormData = accountForm
+        return true
+    }
+    
     
     /*
     // MARK: - Navigation
@@ -134,23 +215,58 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func bt1Action(_ sender: UIButton) {
-    
+        currentInputIndex = 1
+        setOffSet()
     }
     @IBAction func bt2Action(_ sender: UIButton) {
-    
+        currentInputIndex = 2
+        setOffSet()
     }
     @IBAction func bt3Action(_ sender: UIButton) {
-    
+        currentInputIndex = 3
+        setOffSet()
     }
     @IBAction func bt4Action(_ sender: UIButton) {
-    
+        currentInputIndex = 4
+        setOffSet()
     }
     @IBAction func bt5Action(_ sender: UIButton) {
-    
+        currentInputIndex = 5
+        setOffSet()
     }
-    @IBAction func bt6Action(_ sender: UIButton) {
     
+    @IBAction func hideKeyBoardTap(_ sender: UITapGestureRecognizer) {
+//        self.view.endEditing(true)
     }
+    @IBAction func backStepAction(_ sender: UIButton) {
+        if currentInputIndex > 0 {
+            currentInputIndex -= 1
+            setBackOffSet()
+        }
+    }
+    @IBAction func confirmAction(_ sender: UIButton) {
+        confirmButton.isEnabled = false
+        if !validateInput() {
+            confirmButton.isEnabled = true
+            return
+        }
+        let user = createUserFormData
+        ResourceRequest<CreateUserFormData>(resourcePath: "users").save(user) { [weak self] result in
+            switch result {
+            case .failure:
+                print("upload fail")
+                ErrorPresenter.showError(message: "There was a problem creating user!", on: self) {_ in
+                    self!.confirmButton.isEnabled = true
+                }
+            case .success:
+                DispatchQueue.main.async { [weak self] in
+                    print("successful created annotation!")
+                    DidRequestServer.successful(on: self)
+                }
+            }
+        }
+    }
+    
 }
 
 extension SignUpViewController: UIScrollViewDelegate {
@@ -176,6 +292,11 @@ extension SignUpViewController: UIScrollViewDelegate {
         if scrollView.tag == 1 && scrollView.contentOffset.x < -15.0 {
             navigationController?.popViewController(animated: true)
         }
+        
+        
+        if scrollView.tag == 0 && scrollInputView.contentOffset.x == 0.0 {
+            backStepButton.isEnabled = false
+        }
 //        if (2.2 > scrollView.contentOffset.x) {
 //            // move up
 //        }
@@ -187,3 +308,17 @@ extension SignUpViewController: UIScrollViewDelegate {
 //        lastContentOffset = scrollView.contentOffset.x
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

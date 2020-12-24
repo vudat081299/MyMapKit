@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B590BCD259480CE000519FA /* MessagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B590BCC259480CE000519FA /* MessagePresenter.swift */; };
+		6B590BD825949344000519FA /* SuccessRequestServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B590BD725949344000519FA /* SuccessRequestServerView.swift */; };
+		6B590BDD2594934F000519FA /* SuccessRequestServerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B590BDC2594934F000519FA /* SuccessRequestServerView.xib */; };
+		6B590BE22594AB87000519FA /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B590BE12594AB87000519FA /* Auth.swift */; };
+		6B590BE72594AC81000519FA /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B590BE62594AC81000519FA /* Login.storyboard */; };
+		6B590BEC2594ADC9000519FA /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B590BEB2594ADC9000519FA /* Token.swift */; };
 		6B69D48925836C4400E7B625 /* Annotation.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 6B69D48825836C4400E7B625 /* Annotation.geojson */; };
 		6B69D49925852A0700E7B625 /* CapturePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B69D49825852A0700E7B625 /* CapturePhoto.swift */; };
 		6B69D49E25852B2100E7B625 /* CapturedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B69D49D25852B2100E7B625 /* CapturedImageView.swift */; };
@@ -110,6 +116,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6B590BCC259480CE000519FA /* MessagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePresenter.swift; sourceTree = "<group>"; };
+		6B590BD725949344000519FA /* SuccessRequestServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessRequestServerView.swift; sourceTree = "<group>"; };
+		6B590BDC2594934F000519FA /* SuccessRequestServerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuccessRequestServerView.xib; sourceTree = "<group>"; };
+		6B590BE12594AB87000519FA /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
+		6B590BE62594AC81000519FA /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		6B590BEB2594ADC9000519FA /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		6B69D48825836C4400E7B625 /* Annotation.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Annotation.geojson; sourceTree = "<group>"; };
 		6B69D49825852A0700E7B625 /* CapturePhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturePhoto.swift; sourceTree = "<group>"; };
 		6B69D49D25852B2100E7B625 /* CapturedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturedImageView.swift; sourceTree = "<group>"; };
@@ -226,6 +238,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B590BCB25948098000519FA /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				6B590BCC259480CE000519FA /* MessagePresenter.swift */,
+				6B590BD725949344000519FA /* SuccessRequestServerView.swift */,
+				6B590BDC2594934F000519FA /* SuccessRequestServerView.xib */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		6B69D48625836C4400E7B625 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -408,8 +430,10 @@
 				6B894B76258D7D5400020EFD /* UserInfo */,
 				6B894BCF258F114B00020EFD /* UploadAnnotation */,
 				6B894B7D258DDAD500020EFD /* AnnotationDetail */,
+				6B590BCB25948098000519FA /* Components */,
 				6BF7B39D2582891F0093BA45 /* ViewController.swift */,
 				6B816A3C258B9AC300092325 /* Main.storyboard */,
+				6B590BE62594AC81000519FA /* Login.storyboard */,
 				6BF7B3A7258289220093BA45 /* LaunchScreen.storyboard */,
 				6BF7B3A5258289220093BA45 /* Assets.xcassets */,
 				6BF7B3AA258289220093BA45 /* Info.plist */,
@@ -449,6 +473,7 @@
 			isa = PBXGroup;
 			children = (
 				6B69D4A225852B7900E7B625 /* Upload.swift */,
+				6B590BEB2594ADC9000519FA /* Token.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -485,6 +510,7 @@
 			children = (
 				6BF7B3E525828CF00093BA45 /* ResourceRequest.swift */,
 				6BF7B3ED25828D190093BA45 /* ErrorControl.swift */,
+				6B590BE12594AB87000519FA /* Auth.swift */,
 			);
 			path = RequestAPI;
 			sourceTree = "<group>";
@@ -614,8 +640,10 @@
 				6B894C05258F3D4000020EFD /* ImageAnnotation.xib in Resources */,
 				6B894C0C258F419300020EFD /* ViewImageCellTableViewCell.xib in Resources */,
 				6B894BD3258F116700020EFD /* UploadAnnotationViewController.xib in Resources */,
+				6B590BDD2594934F000519FA /* SuccessRequestServerView.xib in Resources */,
 				6B894B89258DDE3C00020EFD /* AnnotationImageCell.xib in Resources */,
 				6B894BE7258F246E00020EFD /* PickTypePlaceTableViewCell.xib in Resources */,
+				6B590BE72594AC81000519FA /* Login.storyboard in Resources */,
 				6B894BF1258F2A4E00020EFD /* ImagesAnnotationViewCell.xib in Resources */,
 				6B894BF8258F2AA200020EFD /* ImagesAnnotationCollectionViewCell.xib in Resources */,
 				6BF7B3A9258289220093BA45 /* LaunchScreen.storyboard in Resources */,
@@ -646,6 +674,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B590BE22594AB87000519FA /* Auth.swift in Sources */,
 				6B816A6F258BBB6200092325 /* NVActivityIndicatorShape.swift in Sources */,
 				6B69D49E25852B2100E7B625 /* CapturedImageView.swift in Sources */,
 				6B894BA3258E4C3000020EFD /* GradientView.swift in Sources */,
@@ -659,6 +688,7 @@
 				6B816A73258BBB6200092325 /* NVActivityIndicatorAnimationBallClipRotate.swift in Sources */,
 				6B894BF0258F2A4E00020EFD /* ImagesAnnotationViewCell.swift in Sources */,
 				6B816A7A258BBB6200092325 /* NVActivityIndicatorAnimationBallScale.swift in Sources */,
+				6B590BD825949344000519FA /* SuccessRequestServerView.swift in Sources */,
 				6BF7B3DF25828C190093BA45 /* File.swift in Sources */,
 				6B816A8C258BBB6200092325 /* NVActivityIndicatorAnimationBallPulseSync.swift in Sources */,
 				6B816A72258BBB6200092325 /* NVActivityIndicatorAnimationBallGridPulse.swift in Sources */,
@@ -683,6 +713,7 @@
 				6B816A78258BBB6200092325 /* NVActivityIndicatorAnimationLineSpinFadeLoader.swift in Sources */,
 				6B894BD2258F116700020EFD /* UploadAnnotationViewController.swift in Sources */,
 				6B816A76258BBB6200092325 /* NVActivityIndicatorAnimationBallDoubleBounce.swift in Sources */,
+				6B590BCD259480CE000519FA /* MessagePresenter.swift in Sources */,
 				6B816A85258BBB6200092325 /* NVActivityIndicatorAnimationAudioEqualizer.swift in Sources */,
 				6B816A80258BBB6200092325 /* NVActivityIndicatorAnimationSquareSpin.swift in Sources */,
 				6B816A89258BBB6200092325 /* NVActivityIndicatorAnimationLineScale.swift in Sources */,
@@ -706,6 +737,7 @@
 				6BF7B39A2582891F0093BA45 /* AppDelegate.swift in Sources */,
 				6B816A7C258BBB6200092325 /* NVActivityIndicatorAnimationBallBeat.swift in Sources */,
 				6B816A83258BBB6200092325 /* NVActivityIndicatorAnimationBlank.swift in Sources */,
+				6B590BEC2594ADC9000519FA /* Token.swift in Sources */,
 				6B816A8E258BBB6200092325 /* NVActivityIndicatorAnimationBallSpinFadeLoader.swift in Sources */,
 				6BF7B3FD25828F0E0093BA45 /* AnnotationView.swift in Sources */,
 				6B894BFD258F3D2B00020EFD /* ImageAnnotation.swift in Sources */,

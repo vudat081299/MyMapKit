@@ -23,6 +23,10 @@
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <textInputTraits key="textInputTraits"/>
+                        <connections>
+                            <action selector="didEdit:" destination="KGk-i7-Jjw" eventType="editingDidEnd" id="ybX-ZS-ops"/>
+                            <outlet property="delegate" destination="-1" id="h4T-oK-FaO"/>
+                        </connections>
                     </textField>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kaT-ma-6sZ">
                         <rect key="frame" x="15" y="31.5" width="133" height="16"/>

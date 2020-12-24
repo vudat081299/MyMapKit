@@ -62,13 +62,26 @@
                                 <constraint firstAttribute="height" constant="0.5" id="xqP-Sa-5ih"/>
                             </constraints>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uEk-Vz-1dr">
+                            <rect key="frame" x="356" y="50.5" width="43" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="Xq6-t0-XVn"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <state key="normal" title="Done"/>
+                            <connections>
+                                <action selector="uploadAnnotationToServer:" destination="-1" eventType="touchUpInside" id="T6S-rc-93P"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="KlD-gm-MSK" secondAttribute="trailing" id="DML-eQ-be1"/>
                         <constraint firstItem="lxi-cC-Hft" firstAttribute="centerX" secondItem="fBR-Xh-GQW" secondAttribute="centerX" id="QZx-Kl-Mwo"/>
                         <constraint firstAttribute="bottom" secondItem="lxi-cC-Hft" secondAttribute="bottom" constant="7" id="Qaf-pc-Xvy"/>
                         <constraint firstItem="RNc-bM-QtW" firstAttribute="leading" secondItem="fBR-Xh-GQW" secondAttribute="leading" constant="15" id="a0Y-dD-gCz"/>
+                        <constraint firstItem="KlD-gm-MSK" firstAttribute="top" secondItem="uEk-Vz-1dr" secondAttribute="bottom" constant="7" id="e9C-6H-Uu7"/>
                         <constraint firstAttribute="bottom" secondItem="KlD-gm-MSK" secondAttribute="bottom" id="eEf-Xd-oPW"/>
+                        <constraint firstAttribute="trailing" secondItem="uEk-Vz-1dr" secondAttribute="trailing" constant="15" id="nL1-X9-XK4"/>
                         <constraint firstAttribute="bottom" secondItem="RNc-bM-QtW" secondAttribute="bottom" constant="7" id="rhv-dK-JFY"/>
                         <constraint firstItem="KlD-gm-MSK" firstAttribute="leading" secondItem="fBR-Xh-GQW" secondAttribute="leading" id="s5E-WS-Wzh"/>
                     </constraints>
