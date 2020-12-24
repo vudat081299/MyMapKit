@@ -12,6 +12,7 @@ class ViewImageCellTableViewCell: UITableViewCell {
     @IBOutlet weak var textInput: UITextField!
     @IBOutlet weak var imageAnno: UIImageView!
     @IBOutlet weak var layerImageView: UIView!
+    var indexPathRow: Int!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -25,11 +26,7 @@ class ViewImageCellTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     @IBAction func didEdit(_ sender: UITextField) {
-        if uploadAnnotationData.imageNote!.count > 0 {
-            uploadAnnotationData.imageNote?[0] = textInput.text!
-        } else {
-            uploadAnnotationData.imageNote?.append(textInput.text!)
-        }
+        uploadAnnotationData.imageNote?[indexPathRow] = textInput.text!
     }
     
     

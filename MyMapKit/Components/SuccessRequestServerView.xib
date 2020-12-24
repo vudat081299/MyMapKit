@@ -24,11 +24,8 @@
                                 <constraint firstAttribute="width" constant="200" id="izs-v5-KEb"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sucessful create your account!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJY-Yy-vpB">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sucessful create your account!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJY-Yy-vpB">
                             <rect key="frame" x="120" y="64" width="0.0" height="0.0"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="EMu-BX-Jn4"/>
-                            </constraints>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -37,8 +34,8 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="XOa-k1-w2X" firstAttribute="bottom" secondItem="vJY-Yy-vpB" secondAttribute="top" id="7Cr-d1-kS0"/>
-                        <constraint firstItem="vJY-Yy-vpB" firstAttribute="leading" secondItem="k6Y-Rt-N4o" secondAttribute="leading" id="iN0-H2-4Yw"/>
-                        <constraint firstAttribute="trailing" secondItem="vJY-Yy-vpB" secondAttribute="trailing" id="wxt-vB-jVB"/>
+                        <constraint firstItem="vJY-Yy-vpB" firstAttribute="leading" secondItem="k6Y-Rt-N4o" secondAttribute="leading" constant="30" id="iN0-H2-4Yw"/>
+                        <constraint firstAttribute="trailing" secondItem="vJY-Yy-vpB" secondAttribute="trailing" constant="30" id="wxt-vB-jVB"/>
                     </constraints>
                 </view>
             </subviews>
@@ -55,6 +52,7 @@
             </constraints>
             <connections>
                 <outlet property="animationView" destination="XOa-k1-w2X" id="UJY-Bt-3T5"/>
+                <outlet property="title" destination="vJY-Yy-vpB" id="cA9-CW-goP"/>
             </connections>
             <point key="canvasLocation" x="-52" y="62"/>
         </view>

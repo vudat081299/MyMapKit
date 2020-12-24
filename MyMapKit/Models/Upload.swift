@@ -20,15 +20,15 @@ final class AnnotationA: Codable {
 
 final class AnnotationUpload: Codable {
     var title: String
-    var subTitle: String
+    var subTitle: String?
     var latitude: String
     var longitude: String
-    var description: String
-    var image: [File]
-    var type = TypeAnnotation.publibPlace.rawValue
-    var imageNote: [String]
+    var description: String?
+    var image: [File]?
+    var type: String? = String(TypeAnnotation.publibPlace.rawValue)
+    var imageNote: String?
     
-    init(title: String, subTitle: String, latitude: String, longitude: String, description: String, imageNote: [String], image: [File]) {
+    init(title: String, subTitle: String, latitude: String, longitude: String, description: String, imageNote: String, image: [File], city: String, country: String) {
         self.title = title
         self.subTitle = subTitle
         self.latitude = latitude
@@ -36,45 +36,12 @@ final class AnnotationUpload: Codable {
         self.description = description
         self.imageNote = imageNote
         self.image = image
-        
+        self.city = city
+        self.country = country
     }
     
-    var country: String? {
-        get {
-            getPlaceInfo()[0]
-        }
-    }
-    var city: String? {
-        get {
-            getPlaceInfo()[0]
-        }
-    }
-    func getPlaceInfo() -> [String] {
-        var place = ["", "", ""]
-        let geocoder = CLGeocoder()
-        geocoder.reverseGeocodeLocation(ViewController.userLocationVal) { (placemarks, error) in
-            if (error != nil){
-                print("error in reverseGeocode - can not get location of device!")
-            }
-            var placemark: [CLPlacemark]!
-            if placemarks != nil {
-                placemark = placemarks! as [CLPlacemark]
-            } else {
-                print("loading location..")
-                return
-            }
-            if placemark.count > 0 {
-                let placemark = placemarks![0]
-                place[0] = placemark.locality!
-                place[1] = placemark.administrativeArea!
-                place[2] = placemark.country!
-//                print(placemark.locality!)
-//                print(placemark.administrativeArea!)
-//                print(placemark.country!)
-            }
-        }
-        return place
-    }
+    var country: String?
+    var city: String?
 }
 
 final class AnnotationInfo: Codable {

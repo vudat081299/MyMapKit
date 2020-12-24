@@ -261,7 +261,7 @@ class SignUpViewController: UIViewController {
             case .success:
                 DispatchQueue.main.async { [weak self] in
                     print("successful created annotation!")
-                    DidRequestServer.successful(on: self)
+                    DidRequestServer.successful(on: self, title: "Sucessful create your account!")
                 }
             }
         }

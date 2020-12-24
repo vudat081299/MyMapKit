@@ -27,11 +27,11 @@ class MessagePresenter {
 }
 
 class DidRequestServer {
-    static func successful(on viewController: UIViewController?, dismissAction: ((UIAlertAction) -> Void)? = nil) {
+    static func successful(on viewController: UIViewController?, dismissAction: ((UIAlertAction) -> Void)? = nil, title: String) {
         weak var vc = viewController
         DispatchQueue.main.async {
             vc!.view.endEditing(true)
-            let view = SuccessRequestServerView.instanceFromNib()
+            let view = SuccessRequestServerView.instanceFromNib(title: title)
             view.frame = CGRect(x: 0, y: 0, width: vc!.view.frame.size.width, height: vc!.view.frame.size.height)
             view.alpha = 0
             vc!.view.addSubview(view)

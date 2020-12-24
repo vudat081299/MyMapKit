@@ -26,14 +26,18 @@ class Auth {
     }
   }
   
-  func logout() {
+  func logout(on viewController: UIViewController?) {
     self.token = nil
     DispatchQueue.main.async {
-      guard let applicationDelegate = UIApplication.shared.delegate as? AppDelegate else {
-        return
-      }
-      let rootController = UIStoryboard(name: "Login", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginNavigation")
-      applicationDelegate.window?.rootViewController = rootController
+//      guard let applicationDelegate = UIApplication.shared.delegate as? SceneDelegate else {
+//        return
+//      }
+//      let rootController = UIStoryboard(name: "Login", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginNavigation")
+//      applicationDelegate.window?.rootViewController = rootController
+        
+        let vc = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()!
+        vc.modalPresentationStyle = .fullScreen
+        viewController!.present(vc, animated:true, completion:nil)
     }
   }
 

@@ -19,32 +19,26 @@ struct UploadAnnotationData {
     var subTitle = "a"
     var description = "a"
     var type: TypeAnnotation?
-    var imageNote: [String]? = ["a"]
+    var imageNote: [String]?
     var image: [File]?
-    var lat: CLLocationDegrees {
+    var lat: CLLocationDegrees? {
         get {
-            return ViewController.userLocationVal.coordinate.latitude
+            return ViewController.userLocationVal?.coordinate.latitude
         }
     }
-    var long: CLLocationDegrees {
+    var long: CLLocationDegrees? {
         get {
-            return ViewController.userLocationVal.coordinate.longitude
+            return ViewController.userLocationVal?.coordinate.longitude
         }
     }
-    var country: String? {
-        get {
-            getPlaceInfo()[0]
-        }
-    }
-    var city: String? {
-        get {
-            getPlaceInfo()[0]
-        }
-    }
+    
     func getPlaceInfo() -> [String] {
-        var place = ["", "", ""]
+        var place = ["Earth", "Earth", "Earth"]
         let geocoder = CLGeocoder()
-        geocoder.reverseGeocodeLocation(ViewController.userLocationVal) { (placemarks, error) in
+        guard let userLocation = ViewController.userLocationVal else {
+            return place
+        }
+        geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
             if (error != nil){
                 print("error in reverseGeocode - can not get location of device!")
             }
@@ -87,6 +81,7 @@ class UploadAnnotationViewController: UIViewController, UITableViewDelegate, UIT
         if section == 0 {
             return 3
         } else if section == 1 {
+            uploadAnnotationData.imageNote = Array(repeating: "", count: listCapturedImage!.count)
             return listCapturedImage!.count
         }
         return 0
@@ -106,6 +101,7 @@ class UploadAnnotationViewController: UIViewController, UITableViewDelegate, UIT
             cell.imageAnno.border()
             cell.layerImageView.dropShadow()
             cell.textInput.placeholder = "Enter your review"
+            cell.indexPathRow = indexPath.row
             return cell
         }
         return UITableViewCell()
@@ -154,18 +150,27 @@ class UploadAnnotationViewController: UIViewController, UITableViewDelegate, UIT
         navigationController?.popViewController(animated: true)
     }
     @IBAction func uploadAnnotationToServer(_ sender: UIButton) {
+        self.view.endEditing(true)
         var file = [File] ()
         for (index, value) in listCapturedImage!.enumerated() {
             file.append(File(data: value.pngData()!, filename: "\(index)"))
         }
-        let user = AnnotationUpload(title: uploadAnnotationData.title, subTitle: uploadAnnotationData.subTitle, latitude: String(ViewController.userLocationVal.coordinate.latitude), longitude: String(ViewController.userLocationVal.coordinate.longitude), description: uploadAnnotationData.description, imageNote: uploadAnnotationData.imageNote!, image: file)
+        
+        var note = ""
+        for n in uploadAnnotationData.imageNote! {
+            note += "-\(n)"
+        }
+        
+        let user = AnnotationUpload(title: uploadAnnotationData.title, subTitle: uploadAnnotationData.subTitle, latitude: String(ViewController.userLocationVal?.coordinate.latitude ?? 20.00), longitude: String(ViewController.userLocationVal?.coordinate.longitude ?? 20.00), description: uploadAnnotationData.description, imageNote: note, image: file, city: uploadAnnotationData.getPlaceInfo()[0], country: uploadAnnotationData.getPlaceInfo()[0])
         ResourceRequest<AnnotationUpload>(resourcePath: "annotations").save(user) { [weak self] result in
             switch result {
             case .failure:
                 print("upload fail")
+                ErrorPresenter.showError(message: "There was a problem creating annotation!", on: self)
             case .success:
                 DispatchQueue.main.async { [weak self] in
                     print("successful created annotation!")
+                    DidRequestServer.successful(on: self, title: "Sucessful create a annotation!")
                 }
             }
         }

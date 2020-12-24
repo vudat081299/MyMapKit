@@ -17,15 +17,17 @@ class SuccessRequestServerView: UIView {
         // Drawing code
     }
     */
-    fileprivate func setupView() {
+    @IBOutlet weak var title: UILabel!
+    fileprivate func setupView(title: String) {
         // do your setup here
         animationView.type = .ballPulseSync
         animationView.startAnimating()
+        self.title.text = title
     }
     
-    class func instanceFromNib() -> SuccessRequestServerView {
+    class func instanceFromNib(title: String) -> SuccessRequestServerView {
         let view = UINib(nibName: "SuccessRequestServerView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! SuccessRequestServerView
-        view.setupView()
+        view.setupView(title: title)
         return view
     }
     

@@ -10,21 +10,33 @@ import MapKit
 import Contacts
 
 class Annotation: NSObject, MKAnnotation {
-  let title: String?
-  let locationName: String?
-  let discipline: String?
-  let coordinate: CLLocationCoordinate2D
+    let title: String?
+    let mySubTitle: String?
+    let discipline: String?
+    let coordinate: CLLocationCoordinate2D
+    let type: String?
+    let imageNote: String?
+    let country: String?
+    let city: String?
   
   init(
     title: String?,
     locationName: String?,
     discipline: String?,
-    coordinate: CLLocationCoordinate2D
+    coordinate: CLLocationCoordinate2D,
+    type: String?,
+    imageNote: String?,
+    country: String?,
+    city: String?
   ) {
     self.title = title
-    self.locationName = locationName
+    self.mySubTitle = locationName
     self.discipline = discipline
     self.coordinate = coordinate
+    self.type = type
+    self.imageNote = imageNote
+    self.country = country
+    self.city = city
     
     super.init()
   }
@@ -43,18 +55,23 @@ class Annotation: NSObject, MKAnnotation {
     
     // 3
     title = (properties["title"] as? String) ?? "Updating name..."
-    locationName = (properties["location"] as? String) ?? "Updating description..."
-    discipline = (properties["discipline"] as? String)
+    mySubTitle = (properties["subTitle"] as? String) ?? "Updating description..."
+    discipline = (properties["type"] as? String) ?? "Mural"
     coordinate = point.coordinate
+    type = (properties["type"] as? String) ?? "Mural"
+    imageNote = (properties["imageNote"] as? String) ?? "Mural"
+    city = (properties["city"] as? String) ?? "Earth"
+    country = (properties["country"] as? String) ?? "Earth"
+    
     super.init()
   }
   
   var subtitle: String? {
-    return locationName
+    return mySubTitle
   }
   
   var mapItem: MKMapItem? {
-    guard let location = locationName else {
+    guard let location = mySubTitle else {
       return nil
     }
     

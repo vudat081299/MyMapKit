@@ -25,7 +25,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     
     // MARK: - Statics
-    static var userLocationVal = CLLocation()
+    static var userLocationVal: CLLocation?
     var userLocation: CLLocation? {
         willSet {
             if isJustGetintoApp {

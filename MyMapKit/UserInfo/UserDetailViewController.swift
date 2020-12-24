@@ -63,4 +63,13 @@ class UserDetailViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBAction func backButton(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
+    @IBAction func logOut(_ sender: UIButton) {
+        // method 1
+//        let vc = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()!
+//        vc.modalPresentationStyle = .fullScreen
+//        self.present(vc, animated:true, completion:nil)
+        
+        // method 2
+        Auth().logout(on: self)
+    }
 }

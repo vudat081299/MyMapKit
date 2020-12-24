@@ -120,8 +120,18 @@ class UserAccessControlViewController: UIViewController, UIScrollViewDelegate {
             case .success:
                 DispatchQueue.main.async { [self] in
                     startLoading {
-                        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-                        appDelegate?.window?.rootViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateInitialViewController()
+//                        let appDelegate = UIApplication.shared.delegate as? SceneDelegate
+//                        appDelegate?.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+//                        self.addChild(UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()!)
+                        
+                        // using with storyboard reference
+//                        startLoading {
+//                            self.performSegue(withIdentifier: "didLogin", sender: nil)
+//                        }
+                        
+                        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()!
+                        vc.modalPresentationStyle = .fullScreen
+                        self.present(vc, animated:true, completion:nil)
                     }
                 }
             case .failure:
@@ -157,10 +167,6 @@ class UserAccessControlViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func endTypingPassword(_ sender: UITextField) {
-        
-    }
-    
-    @IBAction func logout(_ unwindSegue: UIStoryboardSegue) {
         
     }
     
