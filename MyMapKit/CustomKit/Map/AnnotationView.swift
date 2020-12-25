@@ -34,7 +34,6 @@ struct AnnotationConfig {
 //}
 
 class AnnotationView: MKAnnotationView {
-    var showMarker = false
     
     var imageView: UIImageView!
     
@@ -43,17 +42,6 @@ class AnnotationView: MKAnnotationView {
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         
-        
-        if showMarker {
-        } else {
-            frame = CGRect(x: 0, y: 0, width: AnnotationConfig.length_edge, height: AnnotationConfig.length_edge)
-            imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: AnnotationConfig.length_edge, height: AnnotationConfig.length_edge))
-            imageView.backgroundColor = UIColor.white
-            imageView.roundedBorder()
-            imageView.layer.borderWidth = AnnotationConfig.border_width
-            imageView.layer.borderColor = AnnotationConfig.border_color
-            addSubview(imageView)
-        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -74,7 +62,31 @@ class AnnotationView: MKAnnotationView {
             guard let artwork = newValue as? Annotation else {
                 return
             }
+            print("annotation")
             currentAnnotation = artwork
+            
+            if imageView != nil {
+                imageView.removeFromSuperview()
+            }
+            if currentAnnotation.type == "6" || currentAnnotation.type == "7" {
+                let edge = 2 * AnnotationConfig.length_edge
+                frame = CGRect(x: 0, y: 0, width: edge, height: edge)
+                imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: edge, height: edge))
+                imageView.backgroundColor = UIColor.white
+                imageView.roundedBorder()
+                imageView.layer.borderWidth = AnnotationConfig.border_width
+                imageView.layer.borderColor = UIColor.clear.cgColor
+                zPriority = .max 
+            } else {
+                frame = CGRect(x: 0, y: 0, width: AnnotationConfig.length_edge, height: AnnotationConfig.length_edge)
+                imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: AnnotationConfig.length_edge, height: AnnotationConfig.length_edge))
+                imageView.backgroundColor = UIColor.white
+                imageView.roundedBorder()
+                imageView.layer.borderWidth = AnnotationConfig.border_width
+                imageView.layer.borderColor = AnnotationConfig.border_color
+                zPriority = .min
+            }
+            addSubview(imageView)
             
             canShowCallout = true
             calloutOffset = CGPoint(x: 0, y: 0)

@@ -9,10 +9,10 @@ import UIKit
 import CoreLocation
 
 enum TypeAnnotation: Int, CaseIterable {
-    case publibPlace, restaurant, coffeShop, clothesShop, pharmacy, superMaket
+    case publibPlace, restaurant, coffeeShop, clothesShop, pharmacy, superMaket, virus, sos
 }
 
-let typeAnnotationText = ["Public place", "Restaurant", "Coffe Shop", "Clothes Shop", "Pharmacy", "Super Maket"]
+let typeAnnotationText = ["Public place", "Restaurant", "Coffee Shop", "Clothes Shop", "Pharmacy", "Super Maket", "Virus", "Sos"]
 
 struct UploadAnnotationData {
     var title = "a"

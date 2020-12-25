@@ -4,19 +4,589 @@
         {
             "type": "Feature",
             "properties": {
-                "longitude": "105.84836491287862",
-                "id": "1",
-                "title": "h",
-                "latitude": "20.99345540728159",
-                "description": "a",
-                "type": "0",
-                "subTitle": "a"
+                "longitude": "105.74836491287862",
+                "id": "5",
+                "title": "Nhà hàng châu âu",
+                "latitude": "20.89345540728159",
+                "description": "Bếp trưởng là người Pháp, nấu ăn rất ngon, giá cả hợp lý.",
+                "type": "1",
+                "subTitle": "Chuỗi nhà hàng master chef"
             },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    105.84836491287862,
-                    20.993455407281591
+                    105.74856491287862,
+                    20.983455407281591
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.74836491287862",
+                "id": "5",
+                "title": "Highland coffee",
+                "latitude": "20.99345540728159",
+                "description": "Ngoài cà phê còn phục vụ thêm bánh, rất ngon.",
+                "type": "2",
+                "subTitle":  "Chuỗi cửa hàng cà phê nguyên chất Highland"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.79826491287862,
+                    20.973455407281591
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.84353252345523",
+                "id": "5",
+                "title": "Cửa hàng quần áo Boo",
+                "latitude": "20.990235423452234",
+                "description": "Cửa hàng có các mẫu quần áo độ tuồi 15 - 35, chất liệu đẹp, nhân viên nhiệt tình.",
+                "type": "3",
+                "subTitle": "Thời trang cho giới trẻ"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.84653252345523,
+                    20.990235423452234
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.9056345636564",
+                "id": "5",
+                "title": "Hiệu thuốc",
+                "latitude": "20.99745540728159",
+                "description": "Nhiều nhãn hiệu thuốc từ nước ngoài.",
+                "type": "4",
+                "subTitle": "Chỉ bán thuốc theo đơn của bác sĩ"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.9056345636564,
+                    20.99705540728159
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.9056345636564",
+                "id": "5",
+                "title": "Hiệu thuốc",
+                "latitude": "20.99745540728159",
+                "description": "Nhiều nhãn hiệu thuốc từ nước ngoài.",
+                "type": "4",
+                "subTitle": "Chỉ bán thuốc theo đơn của bác sĩ"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.8156345636564,
+                    20.999705540728159
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.9056345636564",
+                "id": "5",
+                "title": "Hiệu thuốc",
+                "latitude": "20.99745540728159",
+                "description": "Nhiều nhãn hiệu thuốc từ nước ngoài.",
+                "type": "4",
+                "subTitle": "Chỉ bán thuốc theo đơn của bác sĩ"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.79056345636564,
+                    20.8705540728159
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.9056345636564",
+                "id": "5",
+                "title": "Hiệu thuốc",
+                "latitude": "20.99745540728159",
+                "description": "Nhiều nhãn hiệu thuốc từ nước ngoài.",
+                "type": "4",
+                "subTitle": "Chỉ bán thuốc theo đơn của bác sĩ"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.9356345636564,
+                    20.92705540728159
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.82836491287862",
+                "id": "5",
+                "title": "VinMart",
+                "latitude": "20.99345540728159",
+                "description": "Siêu thị VinMart thuộc chuỗi siêu thị tập đoàn Vingroup.",
+                "type": "5",
+                "subTitle": "Siêu thị - chấp nhận thanh toán qua thẻ"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.82836491287862,
+                    20.971455407281591
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.84836591287862",
+                "id": "5",
+                "title": "Zara",
+                "latitude": "20.99345550728159",
+                "description": "Mức giá trung bình 1.000.000, chất liệu rất đẹp, bền.",
+                "type": "3",
+                "subTitle": "Cửa hàng quần áo từ Tây Ban Nha"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.85836591287862,
+                    20.92341235213512
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.84836495287862",
+                "id": "5",
+                "title": "Highland coffee",
+                "latitude": "20.99345540728159",
+                "description": "Ngoài cà phê còn phục vụ thêm bánh, rất ngon.",
+                "type": "2",
+                "subTitle": "Chuỗi cửa hàng cà phê nguyên chất Highland"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.894123612351234,
+                    20.999351235123512
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.84836495287862",
+                "id": "5",
+                "title": "Highland coffee",
+                "latitude": "20.99345540728159",
+                "description": "Ngoài cà phê còn phục vụ thêm bánh, rất ngon.",
+                "type": "2",
+                "subTitle": "Chuỗi cửa hàng cà phê nguyên chất Highland"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.8100000000,
+                    20.99351235123637137
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.84836499287862",
+                "id": "5",
+                "title": "Nhà hàng châu âu",
+                "latitude": "20.98955540728159",
+                "description": "Bếp trưởng là người Pháp, nấu ăn rất ngon, giá cả hợp lý.",
+                "type": "1",
+                "subTitle": "Chuỗi nhà hàng master chef"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.79153151235235,
+                    20.986555407281591
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.84836499287862",
+                "id": "5",
+                "title": "Nhà hàng châu âu",
+                "latitude": "20.98955540728159",
+                "description": "Bếp trưởng là người Pháp, nấu ăn rất ngon, giá cả hợp lý.",
+                "type": "1",
+                "subTitle": "Chuỗi nhà hàng master chef"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.8411111111111111,
+                    20.9826262728
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.84836499287862",
+                "id": "5",
+                "title": "Nhà hàng châu âu",
+                "latitude": "20.98955540728159",
+                "description": "Bếp trưởng là người Pháp, nấu ăn rất ngon, giá cả hợp lý.",
+                "type": "1",
+                "subTitle": "Chuỗi nhà hàng master chef"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.8455555555555,
+                    20.9123232323232
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.84836499287862",
+                "id": "5",
+                "title": "Nhà hàng châu âu",
+                "latitude": "20.98955540728159",
+                "description": "Bếp trưởng là người Pháp, nấu ăn rất ngon, giá cả hợp lý.",
+                "type": "1",
+                "subTitle": "Chuỗi nhà hàng master chef"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.844444444444,
+                    20.987654326543
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.84836499287862",
+                "id": "5",
+                "title": "Nhà hàng châu âu",
+                "latitude": "20.98955540728159",
+                "description": "Bếp trưởng là người Pháp, nấu ăn rất ngon, giá cả hợp lý.",
+                "type": "1",
+                "subTitle": "Chuỗi nhà hàng master chef"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.8523516236,
+                    20.9738465235512351
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.84836499287862",
+                "id": "5",
+                "title": "Nhà hàng châu âu",
+                "latitude": "20.98955540728159",
+                "description": "Bếp trưởng là người Pháp, nấu ăn rất ngon, giá cả hợp lý.",
+                "type": "1",
+                "subTitle": "Chuỗi nhà hàng master chef"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.852351236236127,
+                    20.96712342343242
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.82836491287862",
+                "id": "5",
+                "title": "VinMart",
+                "latitude": "20.99345540728159",
+                "description": "Siêu thị VinMart thuộc chuỗi siêu thị tập đoàn Vingroup.",
+                "type": "5",
+                "subTitle": "Siêu thị - chấp nhận thanh toán qua thẻ"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.825235123512512,
+                    20.993354215215215
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.82836491287862",
+                "id": "5",
+                "title": "VinMart",
+                "latitude": "20.99345540728159",
+                "description": "Siêu thị VinMart thuộc chuỗi siêu thị tập đoàn Vingroup.",
+                "type": "5",
+                "subTitle": "Siêu thị - chấp nhận thanh toán qua thẻ"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.8163261236126,
+                    20.961263612361235
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.82836491287862",
+                "id": "5",
+                "title": "VinMart",
+                "latitude": "20.99345540728159",
+                "description": "Siêu thị VinMart thuộc chuỗi siêu thị tập đoàn Vingroup.",
+                "type": "5",
+                "subTitle": "Siêu thị - chấp nhận thanh toán qua thẻ"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.632512351235125,
+                    20.652351235125
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.82836491287862",
+                "id": "5",
+                "title": "VinMart",
+                "latitude": "20.99345540728159",
+                "description": "Siêu thị VinMart thuộc chuỗi siêu thị tập đoàn Vingroup.",
+                "type": "5",
+                "subTitle": "Siêu thị - chấp nhận thanh toán qua thẻ"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.8215123512351235,
+                    20.999435314513451
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.82836491287862",
+                "id": "5",
+                "title": "VinMart",
+                "latitude": "20.99345540728159",
+                "description": "Siêu thị VinMart thuộc chuỗi siêu thị tập đoàn Vingroup.",
+                "type": "5",
+                "subTitle": "Siêu thị - chấp nhận thanh toán qua thẻ"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.8212531512351235,
+                    20.998461345131235
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.82836491287862",
+                "id": "5",
+                "title": "VinMart",
+                "latitude": "20.99345540728159",
+                "description": "Siêu thị VinMart thuộc chuỗi siêu thị tập đoàn Vingroup.",
+                "type": "5",
+                "subTitle": "Siêu thị - chấp nhận thanh toán qua thẻ"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.8215123512351235,
+                    20.88461346136415345
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.82836491287862",
+                "id": "5",
+                "title": "VinMart",
+                "latitude": "20.99345540728159",
+                "description": "Siêu thị VinMart thuộc chuỗi siêu thị tập đoàn Vingroup.",
+                "type": "5",
+                "subTitle": "Siêu thị - chấp nhận thanh toán qua thẻ"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.87452345234523,
+                    20.916512356123512
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.82836491287862",
+                "id": "5",
+                "title": "VinMart",
+                "latitude": "20.99345540728159",
+                "description": "Siêu thị VinMart thuộc chuỗi siêu thị tập đoàn Vingroup.",
+                "type": "5",
+                "subTitle": "Siêu thị - chấp nhận thanh toán qua thẻ"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.9123512351235,
+                    20.95235123512512
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.82836491287862",
+                "id": "5",
+                "title": "VinMart",
+                "latitude": "20.99345540728159",
+                "description": "Siêu thị VinMart thuộc chuỗi siêu thị tập đoàn Vingroup.",
+                "type": "5",
+                "subTitle": "Siêu thị - chấp nhận thanh toán qua thẻ"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.8212351235125,
+                    20.951235125312
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.82836491287862",
+                "id": "5",
+                "title": "VinMart",
+                "latitude": "20.99345540728159",
+                "description": "Siêu thị VinMart thuộc chuỗi siêu thị tập đoàn Vingroup.",
+                "type": "5",
+                "subTitle": "Siêu thị - chấp nhận thanh toán qua thẻ"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.862135123512,
+                    20.973451351235
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.82836491287862",
+                "id": "5",
+                "title": "VinMart",
+                "latitude": "20.99345540728159",
+                "description": "Siêu thị VinMart thuộc chuỗi siêu thị tập đoàn Vingroup.",
+                "type": "5",
+                "subTitle": "Siêu thị - chấp nhận thanh toán qua thẻ"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.8258568365,
+                    21.00123512351251
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.82836491287862",
+                "id": "5",
+                "title": "VinMart",
+                "latitude": "20.99345540728159",
+                "description": "Siêu thị VinMart thuộc chuỗi siêu thị tập đoàn Vingroup.",
+                "type": "5",
+                "subTitle": "Siêu thị - chấp nhận thanh toán qua thẻ"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.8212351235,
+                    20.93504112351235
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.82836491287862",
+                "id": "5",
+                "title": "Virus",
+                "latitude": "20.99345540728159",
+                "description": "3 ca nhiễm là F1 và 12 ca nghi là F2 đã được khoanh vùng và cách ly.",
+                "type": "6",
+                "subTitle": "Bùng nổ số ca nhiễm covid 19 tại đây"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.86856491287862,
+                    20.935123512351
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "longitude": "105.82836491287862",
+                "id": "5",
+                "title": "SoS",
+                "latitude": "20.99345540728159",
+                "description": "Lực lượng cứu hoả đang đến yêu cầu mọi người hạn chế đi qua khu vực này tạo thuận tiện cho công tác phòng cháy chữa cháy.",
+                "type": "7",
+                "subTitle": "Cháy toà nhà 3 tầng"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.85856491287862,
+                    20.935123512351
                 ]
             }
         }

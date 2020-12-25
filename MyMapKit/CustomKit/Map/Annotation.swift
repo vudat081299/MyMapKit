@@ -13,6 +13,7 @@ class Annotation: NSObject, MKAnnotation {
     let title: String?
     let mySubTitle: String?
     let annoDescription: String?
+    let id: String
     let discipline: String?
     let coordinate: CLLocationCoordinate2D
     let type: String?
@@ -24,6 +25,7 @@ class Annotation: NSObject, MKAnnotation {
     title: String?,
     annoDescription: String?,
     locationName: String?,
+    id: String?,
     discipline: String?,
     coordinate: CLLocationCoordinate2D,
     type: String?,
@@ -34,6 +36,7 @@ class Annotation: NSObject, MKAnnotation {
     self.title = title
     self.mySubTitle = locationName
     self.annoDescription = annoDescription
+    self.id = id!
     self.discipline = discipline
     self.coordinate = coordinate
     self.type = type
@@ -60,6 +63,7 @@ class Annotation: NSObject, MKAnnotation {
     title = (properties["title"] as? String) ?? "Updating name..."
     mySubTitle = (properties["subTitle"] as? String) ?? "Updating..."
     annoDescription = (properties["description"] as? String) ?? "Updating description..."
+    id = (properties["id"] as? String) ?? "Updating description..."
     discipline = "Mural"
     coordinate = point.coordinate
     type = (properties["type"] as? String) ?? "Mural"
@@ -104,19 +108,45 @@ class Annotation: NSObject, MKAnnotation {
   }
   
   var image: UIImage {
-    guard let name = discipline else { return #imageLiteral(resourceName: "defaultAvatar") }
+    // original
+//    guard let name = type else { return #imageLiteral(resourceName: "Flag") }
+//    switch name {
+//    case "Monument":
+//      return #imageLiteral(resourceName: "defaultAvatar")
+//    case "Sculpture":
+//      return #imageLiteral(resourceName: "defaultAvatar_icon")
+//    case "Plaque":
+//      return #imageLiteral(resourceName: "defaultAvatar")
+//    case "Mural":
+//      return #imageLiteral(resourceName: "defaultAvatar_icon")
+//    default:
+//      return #imageLiteral(resourceName: "defaultAvatar_icon")
+//    }
     
-    switch name {
-    case "Monument":
-      return #imageLiteral(resourceName: "defaultAvatar")
-    case "Sculpture":
-      return #imageLiteral(resourceName: "defaultAvatar_icon")
-    case "Plaque":
-      return #imageLiteral(resourceName: "defaultAvatar")
-    case "Mural":
-      return #imageLiteral(resourceName: "defaultAvatar_icon")
+    // custom
+    let nameType = TypeAnnotation(rawValue: Int(type!)!)
+    
+    switch nameType {
+    case .publibPlace: //publibPlace
+        return #imageLiteral(resourceName: "Flag")
+    case .restaurant:
+        return #imageLiteral(resourceName: "restaurant")
+    case .coffeeShop:
+        return #imageLiteral(resourceName: "coffee_shop")
+    case .clothesShop:
+        return #imageLiteral(resourceName: "clothes_store")
+    case .pharmacy:
+        return #imageLiteral(resourceName: "pharmacy")
+    case .superMaket:
+        return #imageLiteral(resourceName: "super_market")
+    case .virus:
+        return #imageLiteral(resourceName: "virus")
+    case .sos:
+        return #imageLiteral(resourceName: "sos")
+        
     default:
-      return #imageLiteral(resourceName: "defaultAvatar_icon")
+        return #imageLiteral(resourceName: "Flag")
     }
+    
   }
 }

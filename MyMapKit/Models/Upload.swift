@@ -83,3 +83,13 @@ final class CreateUserFormData: Codable {
         self.phonenumber = phonenumber
     }
 }
+
+final class AnnotatioImageData: Codable {
+    var annotationImageName: String
+    var image: String
+    
+    init(annotationImageName: String, image: String) {
+        self.annotationImageName = annotationImageName
+        self.image = image
+    }
+}

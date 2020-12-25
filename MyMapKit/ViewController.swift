@@ -15,7 +15,55 @@ import CoreLocation
 //}
 
 // MARK: - MapView container.
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
+        } else if section == 1 {
+            return typeAnnotationText.count
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            let cell = UITableViewCell(style: .default, reuseIdentifier: "Test")
+            if indexPath.row == 0 {
+                cell.textLabel?.text = "All"
+                return cell
+            }
+            return cell
+        }
+        if indexPath.section == 1 {
+            let cell = UITableViewCell(style: .default, reuseIdentifier: "Test")
+            cell.textLabel?.text = typeAnnotationText[indexPath.row]
+            return cell
+        }
+        return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 30
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            loadInitialData()
+        } else if indexPath.section == 1 {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+            filterAnno(with: "\(indexPath.row)")
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.accessoryType = .none
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     
     
     // MARK: - IBOutlets
@@ -23,6 +71,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet private var mapView: MKMapView!
     @IBOutlet weak var userInfoButton: UIButton!
     
+    @IBOutlet weak var pickViewContainer: UIView!
+    @IBOutlet weak var popButton: UIButton!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var csBottomPickViewContainer: NSLayoutConstraint!
     
     // MARK: - Statics
     static var userLocationVal: CLLocation?
@@ -43,6 +95,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     // MARK: - Bools
     var isJustGetintoApp = true
+    var isHidePickerViewContainer = true
     
     
     // MARK: - Consts
@@ -51,7 +104,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     // MARK: - Variables
     var locationManager:CLLocationManager!
-    private var artworks: [Annotation] = []
+    var artworks: [Annotation] = []
     var passingAnnotationFrom: PassingAnnotationFrom!
     
     // MARK: - Life cycle
@@ -106,33 +159,70 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    func filterAnno(with: String) {
+        mapView.removeAnnotations(artworks)
+        artworks = []
+        // 1
+        guard
+            let fileName = Bundle.main.url(forResource: "Annotation", withExtension: "geojson"),
+            let artworkData = try? Data(contentsOf: fileName)
+        else {
+            return
+        }
+        
+        do {
+            // 2
+            let features = try MKGeoJSONDecoder()
+                .decode(artworkData)
+                .compactMap { $0 as? MKGeoJSONFeature }
+            // 3
+            print(features)
+            print(try MKGeoJSONDecoder()
+                    .decode(artworkData))
+            let validWorks = features.compactMap(Annotation.init)
+            // 4
+            for e in validWorks {
+                if e.type == with {
+                    artworks.append(e)
+                    print(e)
+                    print(validWorks.count)
+                }
+            }
+            mapView.addAnnotations(artworks)
+        } catch {
+            // 5
+            print("Unexpected error: \(error).")
+        }
+    }
+    
     // load annotations from file geojson
     private func loadInitialData() {
-        getAnnotationList()
+//        getAnnotationList()
         // 1
-//        guard
-//            let fileName = Bundle.main.url(forResource: "Annotation", withExtension: "geojson"),
-//            let artworkData = try? Data(contentsOf: fileName)
-//        else {
-//            return
-//        }
-//
-//        do {
-//            // 2
-//            let features = try MKGeoJSONDecoder()
-//                .decode(artworkData)
-//                .compactMap { $0 as? MKGeoJSONFeature }
-//            // 3
-//            print(features)
-//            print(try MKGeoJSONDecoder()
-//                    .decode(artworkData))
-//            let validWorks = features.compactMap(Annotation.init)
-//            // 4
-//            artworks.append(contentsOf: validWorks)
-//        } catch {
-//            // 5
-//            print("Unexpected error: \(error).")
-//        }
+        guard
+            let fileName = Bundle.main.url(forResource: "Annotation", withExtension: "geojson"),
+            let artworkData = try? Data(contentsOf: fileName)
+        else {
+            return
+        }
+
+        do {
+            // 2
+            let features = try MKGeoJSONDecoder()
+                .decode(artworkData)
+                .compactMap { $0 as? MKGeoJSONFeature }
+            // 3
+            print(features)
+            print(try MKGeoJSONDecoder()
+                    .decode(artworkData))
+            let validWorks = features.compactMap(Annotation.init)
+            // 4
+            artworks.append(contentsOf: validWorks)
+            mapView.addAnnotations(artworks)
+        } catch {
+            // 5
+            print("Unexpected error: \(error).")
+        }
     }
     
     func getAnnotationList () {
@@ -174,22 +264,47 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         takePhotoViewButton.setImage(image, for: .normal)
         takePhotoViewButton.tintColor = .black
         userInfoButton.roundedBorder()
+        tableView.border()
+        popButton.minEdgeBorder()
     }
     
-    @IBAction func loadinitdata(_ sender: Any) {
-        loadInitialData()
+    @IBAction func popButtonAction(_ sender: UIButton) {
+        if isHidePickerViewContainer {
+            
+            UIView.animate(withDuration: 0.3,
+                           delay: 0.1,
+                           options: [.curveEaseIn],
+                           animations: { [weak self] in
+                            self!.csBottomPickViewContainer.constant = 10
+                            self?.view.layoutIfNeeded()
+                           }, completion: nil)
+            isHidePickerViewContainer = false
+        } else {
+            
+            UIView.animate(withDuration: 0.3,
+                           delay: 0.1,
+                           options: [.curveEaseIn],
+                           animations: { [weak self] in
+                            self!.csBottomPickViewContainer.constant = -168
+                            self?.view.layoutIfNeeded()
+                           }, completion: nil)
+            isHidePickerViewContainer = true
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc = segue.destination as! AnnotatitionViewController
-        vc.annoTitle = passingAnnotationFrom.title
-        vc.mySubTitle = passingAnnotationFrom.mySubTitle
-        vc.annoDescription = passingAnnotationFrom.annoDescription
-        vc.discipline = passingAnnotationFrom.discipline
-        vc.type = passingAnnotationFrom.type
-        vc.imageNote = passingAnnotationFrom.type
-        vc.country = passingAnnotationFrom.country
-        vc.city = passingAnnotationFrom.city
+        if segue.identifier == "annotationDetail" {
+            let vc = segue.destination as! AnnotatitionViewController
+            vc.annoTitle = passingAnnotationFrom.title
+            vc.mySubTitle = passingAnnotationFrom.mySubTitle
+            vc.annoDescription = passingAnnotationFrom.annoDescription
+            vc.id = passingAnnotationFrom.id
+            vc.discipline = passingAnnotationFrom.discipline
+            vc.type = passingAnnotationFrom.type
+            vc.imageNote = passingAnnotationFrom.type
+            vc.country = passingAnnotationFrom.country
+            vc.city = passingAnnotationFrom.city
+        }
     }
 }
 
@@ -218,8 +333,8 @@ extension ViewController: MKMapViewDelegate {
         guard let artwork = view.annotation as? Annotation else {
             return
         }
+        passingAnnotationFrom = PassingAnnotationFrom(title: artwork.title, mySubTitle: artwork.subtitle, annoDescription: artwork.annoDescription, id: artwork.id, discipline: artwork.discipline, type: artwork.type, imageNote: artwork.imageNote, country: artwork.country, city: artwork.city)
         performSegue(withIdentifier: "annotationDetail", sender: self)
-        passingAnnotationFrom = PassingAnnotationFrom(title: artwork.title, mySubTitle: artwork.subtitle, annoDescription: artwork.description, discipline: artwork.discipline, type: artwork.type, imageNote: artwork.imageNote, country: artwork.country, city: artwork.city)
 //        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
 //        artwork.mapItem?.openInMaps(launchOptions: launchOptions)
     }
@@ -276,6 +391,7 @@ struct PassingAnnotationFrom {
     let title: String?
     let mySubTitle: String?
     let annoDescription: String?
+    let id: String?
     let discipline: String?
     let type: String?
     let imageNote: String?
