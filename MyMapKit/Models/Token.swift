@@ -8,12 +8,19 @@
 import Foundation
 
 final class Token: Codable {
-  var id: UUID?
-  var token: String
-  var userID: UUID
+    var code: Int
+    var message: String
+    var data: TokenData
+    
+    init(code: Int, message: String, data: TokenData) {
+        self.code = code
+        self.message = message
+        self.data = data
+    }
+}
 
-  init(token: String, userID: UUID) {
-    self.token = token
-    self.userID = userID
-  }
+struct TokenData: Codable {
+    let id: UUID?
+    let token: String
+    let userID: UUID
 }

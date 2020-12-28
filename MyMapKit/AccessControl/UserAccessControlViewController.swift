@@ -14,7 +14,11 @@ class UserAccessControlViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var welcomeScrollView: UIScrollView!
     @IBOutlet weak var contentStackView: UIStackView!
     @IBOutlet weak var signinView: UIView!
+    @IBOutlet weak var layerUsernameTextField: UIView!
+    @IBOutlet weak var usernameTextFieldContainer: UIView!
     @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var layerPasswordTextField: UIView!
+    @IBOutlet weak var passwordTextFieldContainer: UIView!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var pageControl: UIPageControl!
     
@@ -41,6 +45,16 @@ class UserAccessControlViewController: UIViewController, UIScrollViewDelegate {
         animationLoadingView.type = .cubeTransition
         pageControl.numberOfPages = Int(contentStackView.frame.size.width / self.view.frame.size.width)
         pageControl.currentPage = 0
+        
+        layerUsernameTextField.border()
+        layerUsernameTextField.dropShadow()
+        usernameTextFieldContainer.border()
+        usernameTextFieldContainer.dropShadow()
+        layerPasswordTextField.border()
+        layerPasswordTextField.dropShadow()
+        passwordTextFieldContainer.border()
+        passwordTextFieldContainer.dropShadow()
+        
         
     }
     
@@ -129,7 +143,7 @@ class UserAccessControlViewController: UIViewController, UIScrollViewDelegate {
 //                            self.performSegue(withIdentifier: "didLogin", sender: nil)
 //                        }
                         
-                        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()!
+                        let vc = UIStoryboard(name: "Messager", bundle: nil).instantiateInitialViewController()!
                         vc.modalPresentationStyle = .fullScreen
                         self.present(vc, animated:true, completion:nil)
                     }
@@ -171,7 +185,14 @@ class UserAccessControlViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func customIpAction(_ sender: UIButton) {
+        print(usernameTextField.text!)
+        print(passwordTextField.text!)
         ip = usernameTextField.text!
+        if passwordTextField.text == "true" {
+            demo = true
+        } else {
+            demo = false
+        }
     }
     
     // MARK: Observer methods

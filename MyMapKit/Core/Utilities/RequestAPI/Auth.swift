@@ -12,7 +12,15 @@ enum AuthResult {
   case success
   case failure
 }
-
+var currentUserID: String? {
+    get {
+        return UserDefaults.standard.string(forKey: "UserID")
+    }
+    set {
+        print(newValue!)
+        UserDefaults.standard.set(newValue!, forKey: "UserID") //setObject
+    }
+}
 class Auth {
   static let defaultsKey = "TIL-API-KEY"
   let defaults = UserDefaults.standard
@@ -65,7 +73,8 @@ class Auth {
         do {
           let token = try JSONDecoder()
             .decode(Token.self, from: jsonData)
-          self.token = token.token
+            self.token = token.data.token
+            currentUserID = token.data.userID.uuidString
           completion(.success)
         } catch {
           completion(.failure)

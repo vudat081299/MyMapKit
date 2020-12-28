@@ -14,6 +14,8 @@ import CoreLocation
 //    static var userLocation = CLLocation()
 //}
 
+var demo = false
+
 // MARK: - MapView container.
 class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
     
@@ -100,7 +102,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     
     // MARK: - Consts
     let image = UIImage(named: "camera_icon")?.withRenderingMode(.alwaysTemplate)
-    let annotationsRequestInfo = ResourceRequest<AnnotationInfo>(resourcePath: "annotations")
+    let annotationsRequestInfo = ResourceRequest<AnnotationInfo, AnnotationInfo>(resourcePath: "annotations")
     
     // MARK: - Variables
     var locationManager:CLLocationManager!
@@ -162,66 +164,113 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     func filterAnno(with: String) {
         mapView.removeAnnotations(artworks)
         artworks = []
-        // 1
-        guard
-            let fileName = Bundle.main.url(forResource: "Annotation", withExtension: "geojson"),
-            let artworkData = try? Data(contentsOf: fileName)
-        else {
-            return
-        }
-        
-        do {
-            // 2
-            let features = try MKGeoJSONDecoder()
-                .decode(artworkData)
-                .compactMap { $0 as? MKGeoJSONFeature }
-            // 3
-            print(features)
-            print(try MKGeoJSONDecoder()
-                    .decode(artworkData))
-            let validWorks = features.compactMap(Annotation.init)
-            // 4
-            for e in validWorks {
-                if e.type == with {
-                    artworks.append(e)
-                    print(e)
-                    print(validWorks.count)
+        if demo {
+            // 1
+            guard
+                let fileName = Bundle.main.url(forResource: "Annotation", withExtension: "geojson"),
+                let artworkData = try? Data(contentsOf: fileName)
+            else {
+                return
+            }
+            
+            do {
+                // 2
+                let features = try MKGeoJSONDecoder()
+                    .decode(artworkData)
+                    .compactMap { $0 as? MKGeoJSONFeature }
+                // 3
+                print(features)
+                print(try MKGeoJSONDecoder()
+                        .decode(artworkData))
+                let validWorks = features.compactMap(Annotation.init)
+                // 4
+                for e in validWorks {
+                    if e.type == with {
+                        artworks.append(e)
+                        print(e)
+                        print(validWorks.count)
+                    }
+                }
+                mapView.addAnnotations(artworks)
+            } catch {
+                // 5
+                print("Unexpected error: \(error).")
+            }
+        } else {
+            annotationsRequestInfo.getAllAnnotations { [weak self] result in
+                
+                switch result {
+                case .failure:
+                    ErrorPresenter.showError(message: "There was an error getting the annotations!", on: self)
+                    print("fail get image!")
+                case .success(let annotationData):
+                    DispatchQueue.main.async { [weak self] in
+                        guard self != nil else { return }
+                        // 1
+                        let artworkData = annotationData
+                        do {
+                            // 2
+                            let features = try MKGeoJSONDecoder()
+                                .decode(artworkData)
+                                .compactMap { $0 as? MKGeoJSONFeature }
+                            // 3
+                            print(features)
+                            print(try MKGeoJSONDecoder()
+                                    .decode(artworkData))
+                            let validWorks = features.compactMap(Annotation.init)
+                            // 4
+                            
+                            
+                            // 4
+                            for e in validWorks {
+                                if e.type == with {
+                                    self!.artworks.append(e)
+                                    print(e)
+                                    print(validWorks.count)
+                                }
+                            }
+                            
+                            self!.mapView?.addAnnotations(self!.artworks)
+                        } catch {
+                            // 5
+                            print("Unexpected error: \(error).")
+                        }
+                    }
                 }
             }
-            mapView.addAnnotations(artworks)
-        } catch {
-            // 5
-            print("Unexpected error: \(error).")
         }
     }
     
     // load annotations from file geojson
     private func loadInitialData() {
-//        getAnnotationList()
-        // 1
-        guard
-            let fileName = Bundle.main.url(forResource: "Annotation", withExtension: "geojson"),
-            let artworkData = try? Data(contentsOf: fileName)
-        else {
-            return
-        }
-
-        do {
-            // 2
-            let features = try MKGeoJSONDecoder()
-                .decode(artworkData)
-                .compactMap { $0 as? MKGeoJSONFeature }
-            // 3
-            print(features)
-            print(try MKGeoJSONDecoder()
-                    .decode(artworkData))
-            let validWorks = features.compactMap(Annotation.init)
-            // 4
-            artworks.append(contentsOf: validWorks)
-            mapView.addAnnotations(artworks)
-        } catch {
-            // 5
-            print("Unexpected error: \(error).")
+        if demo {
+            // 1
+            guard
+                let fileName = Bundle.main.url(forResource: "Annotation", withExtension: "geojson"),
+                let artworkData = try? Data(contentsOf: fileName)
+            else {
+                return
+            }
+            
+            do {
+                // 2
+                let features = try MKGeoJSONDecoder()
+                    .decode(artworkData)
+                    .compactMap { $0 as? MKGeoJSONFeature }
+                // 3
+                print(features)
+                print(try MKGeoJSONDecoder()
+                        .decode(artworkData))
+                let validWorks = features.compactMap(Annotation.init)
+                // 4
+                artworks.append(contentsOf: validWorks)
+                mapView.addAnnotations(artworks)
+            } catch {
+                // 5
+                print("Unexpected error: \(error).")
+            }
+        } else {
+            getAnnotationList()
         }
     }
     
@@ -230,7 +279,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
             
             switch result {
             case .failure:
-//                ErrorPresenter.showError(message: "There was an error getting the annotations", on: self)
+                ErrorPresenter.showError(message: "There was an error getting the annotations!", on: self)
                 print("fail get image!")
             case .success(let annotationData):
                 DispatchQueue.main.async { [weak self] in

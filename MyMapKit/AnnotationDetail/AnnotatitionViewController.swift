@@ -105,7 +105,7 @@ class AnnotatitionViewController: UIViewController, UICollectionViewDataSource, 
     
     func getImageData() {
         let idAnno = String(id)
-        let annotationsRequestInfo = ResourceRequest<AnnotatioImageData>(resourcePath: "annotations/\(idAnno)/data")
+        let annotationsRequestInfo = ResourceRequest<AnnotatioImageData, AnnotatioImageData>(resourcePath: "annotations/\(idAnno)/data")
         annotationsRequestInfo.getAll { [weak self] result in
             
             switch result {

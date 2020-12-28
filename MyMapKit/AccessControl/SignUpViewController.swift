@@ -195,7 +195,7 @@ class SignUpViewController: UIViewController {
             MessagePresenter.showMessage(message: "Confirmed password didn't match!", on: self)
             return false
         }
-        let accountForm = CreateUserFormData(name: fullname.text!, username: username.text!, password: password.text!, email: email.text!, phonenumber: phonenumber.text!)
+        let accountForm = CreateUserFormData(name: fullname.text!, username: username.text!, password: password.text!.description, email: email.text!, phonenumber: phonenumber.text!)
         createUserFormData = accountForm
         return true
     }
@@ -251,7 +251,7 @@ class SignUpViewController: UIViewController {
             return
         }
         let user = createUserFormData
-        ResourceRequest<CreateUserFormData>(resourcePath: "users").save(user) { [weak self] result in
+        ResourceRequest<CreateUserFormData, ResponseCreateUser>(resourcePath: "users").saveuser(user) { [weak self] result in
             switch result {
             case .failure:
                 print("upload fail")

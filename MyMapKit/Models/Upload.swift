@@ -25,15 +25,17 @@ final class AnnotationUpload: Codable {
     var longitude: String
     var description: String?
     var image: [File]?
-    var type: String? = String(TypeAnnotation.publibPlace.rawValue)
+//    var type: String? = String(TypeAnnotation.publibPlace.rawValue)
+    var type: String?
     var imageNote: String?
     
-    init(title: String, subTitle: String, latitude: String, longitude: String, description: String, imageNote: String, image: [File], city: String, country: String) {
+    init(title: String, subTitle: String, latitude: String, longitude: String, description: String, type: String, imageNote: String, image: [File], city: String, country: String) {
         self.title = title
         self.subTitle = subTitle
         self.latitude = latitude
         self.longitude = longitude
         self.description = description
+        self.type = type
         self.imageNote = imageNote
         self.image = image
         self.city = city
@@ -69,11 +71,11 @@ final class CheckTotalOfAnnotationsReponse: Codable {
 
 final class CreateUserFormData: Codable {
     var id: UUID?
-    var name: String
+    var name: String?
     var username: String
     var password: String?
-    var email: String
-    var phonenumber: String
+    var email: String?
+    var phonenumber: String?
     
     init(name: String, username: String, password: String, email: String, phonenumber: String) {
         self.name = name
@@ -82,6 +84,20 @@ final class CreateUserFormData: Codable {
         self.email = email
         self.phonenumber = phonenumber
     }
+}
+
+struct ResponseCreateUser: Codable {
+    let code: Int
+    let message: String
+    let data: UserInfoForm
+}
+
+struct UserInfoForm: Codable {
+    var id: String?
+    var name: String?
+    var username: String
+    var email: String?
+    var phonenumber: String?
 }
 
 final class AnnotatioImageData: Codable {

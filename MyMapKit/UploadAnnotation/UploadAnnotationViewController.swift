@@ -12,13 +12,13 @@ enum TypeAnnotation: Int, CaseIterable {
     case publibPlace, restaurant, coffeeShop, clothesShop, pharmacy, superMaket, virus, sos
 }
 
-let typeAnnotationText = ["Public place", "Restaurant", "Coffee Shop", "Clothes Shop", "Pharmacy", "Super Maket", "Virus", "Sos"]
+let typeAnnotationText = ["Public place", "Restaurant", "Coffee Shop", "Clothes Shop", "Pharmacy", "Super Maket", "Virus", "SoS"]
 
 struct UploadAnnotationData {
     var title = "a"
     var subTitle = "a"
     var description = "a"
-    var type: TypeAnnotation?
+    var type: Int = 0
     var imageNote: [String]?
     var image: [File]?
     var lat: CLLocationDegrees? {
@@ -65,12 +65,13 @@ struct UploadAnnotationData {
 
 var uploadAnnotationData = UploadAnnotationData()
 
-class UploadAnnotationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class UploadAnnotationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
     var keyboardHeight: CGFloat = 0.0
     
     @IBOutlet weak var inputTableView: UITableView!
     @IBOutlet weak var csBottomTableView: NSLayoutConstraint!
+    var picker: UIPickerView!
     
     var listCapturedImage: [UIImage]?
     
@@ -81,6 +82,8 @@ class UploadAnnotationViewController: UIViewController, UITableViewDelegate, UIT
         if section == 0 {
             return 3
         } else if section == 1 {
+            return 1
+        } else if section == 2 {
             uploadAnnotationData.imageNote = Array(repeating: "", count: listCapturedImage!.count)
             return listCapturedImage!.count
         }
@@ -89,12 +92,22 @@ class UploadAnnotationViewController: UIViewController, UITableViewDelegate, UIT
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
+            
             let cell: UploadAnnoTableViewCell = tableView.dequeueReusableCell(withIdentifier: "UploadAnnoTableViewCell", for: indexPath) as! UploadAnnoTableViewCell
             cell.indexPath = indexPath
             cell.title.text = inputFieldText[indexPath.row]
             cell.textInput.placeholder = placeholderInputFieldText[indexPath.row]
             return cell
         } else if indexPath.section == 1 {
+            let cell = UITableViewCell(style: .default, reuseIdentifier: "picker")
+            cell.contentView.addSubview(picker)
+            picker.translatesAutoresizingMaskIntoConstraints = false
+            picker.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor).isActive = true
+            picker.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor).isActive = true
+            picker.topAnchor.constraint(equalTo: cell.contentView.topAnchor).isActive = true
+            picker.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor).isActive = true
+            return cell
+        } else if indexPath.section == 2 {
             let cell: ViewImageCellTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ViewImageCellTableViewCell", for: indexPath) as! ViewImageCellTableViewCell
             
             cell.imageAnno.image = listCapturedImage![indexPath.row]
@@ -111,20 +124,34 @@ class UploadAnnotationViewController: UIViewController, UITableViewDelegate, UIT
         if section == 0 {
             return "Information about this place"
         } else if section == 1 {
+            return "Type of location"
+        } else if section == 2 {
             return "Review for every pictures you did take"
         }
         return ""
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        2
+        3
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 
-//    }
-    
+    // picker view datasource
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
 
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return typeAnnotationText.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return typeAnnotationText[row]
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        uploadAnnotationData.type = row
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         uploadAnnotationData = UploadAnnotationData()
@@ -135,12 +162,18 @@ class UploadAnnotationViewController: UIViewController, UITableViewDelegate, UIT
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        picker = UIPickerView()
+        self.picker.delegate = self
+        self.picker.dataSource = self
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             return 60
         } else if indexPath.section == 1 {
+            return 90
+        } else if indexPath.section == 2 {
             return 150
         }
         return 60
@@ -161,8 +194,8 @@ class UploadAnnotationViewController: UIViewController, UITableViewDelegate, UIT
             note += "-\(n)"
         }
         
-        let user = AnnotationUpload(title: uploadAnnotationData.title, subTitle: uploadAnnotationData.subTitle, latitude: String(ViewController.userLocationVal?.coordinate.latitude ?? 20.00), longitude: String(ViewController.userLocationVal?.coordinate.longitude ?? 20.00), description: uploadAnnotationData.description, imageNote: note, image: file, city: uploadAnnotationData.getPlaceInfo()[0], country: uploadAnnotationData.getPlaceInfo()[0])
-        ResourceRequest<AnnotationUpload>(resourcePath: "annotations").save(user) { [weak self] result in
+        let user = AnnotationUpload(title: uploadAnnotationData.title, subTitle: uploadAnnotationData.subTitle, latitude: String(ViewController.userLocationVal?.coordinate.latitude ?? 20.00), longitude: String(ViewController.userLocationVal?.coordinate.longitude ?? 20.00), description: uploadAnnotationData.description, type: String(uploadAnnotationData.type), imageNote: note, image: file, city: uploadAnnotationData.getPlaceInfo()[0], country: uploadAnnotationData.getPlaceInfo()[0])
+        ResourceRequest<AnnotationUpload, AnnotationUpload>(resourcePath: "annotations").save(user) { [weak self] result in
             switch result {
             case .failure:
                 print("upload fail")
