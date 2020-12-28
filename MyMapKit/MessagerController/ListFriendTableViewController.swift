@@ -30,13 +30,13 @@ class ListFriendTableViewController: UITableViewController {
             switch result {
             case .failure:
                 ErrorPresenter.showError(message: "There was an error getting your friends!", on: self)
+                if self!.allUser == nil || self!.allUser.count == 0 {
+                    Auth().logout(on: self)
+                }
             case .success(let data):
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
                     self.allUser = data.data
-                    if self.allUser.count == 0 {
-                        Auth().logout(on: self)
-                    }
                     self.tableView.reloadData()
                     self.createSession()
                 }

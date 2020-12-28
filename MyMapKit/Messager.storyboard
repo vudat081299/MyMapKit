@@ -75,7 +75,7 @@
                                                         <rect key="frame" x="12" y="0.0" width="138" height="30"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" enablesReturnKeyAutomatically="YES"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
                                                     </textField>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.92054104459999997" green="0.91609398639999995" blue="0.92498810279999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -312,7 +312,7 @@
                                 </constraints>
                                 <state key="normal" image="x"/>
                                 <connections>
-                                    <segue destination="bNF-P5-Y1h" kind="unwind" unwindAction="unwindToTb:" id="9lc-Ly-C5g"/>
+                                    <segue destination="bNF-P5-Y1h" kind="unwind" unwindAction="unwindToTb:" id="bKl-FF-Xt3"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -390,12 +390,22 @@
                                     <segue destination="4Nx-bQ-1JD" kind="unwind" unwindAction="unwindToChatVC:" id="6Pn-dz-MJP"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K4T-Kk-MBs">
+                                <rect key="frame" x="0.0" y="224" width="414" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="4Nx-bQ-1JD" kind="unwind" unwindAction="unwindToTb:" id="QGL-az-5h8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eRa-d8-x4m"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="K4T-Kk-MBs" firstAttribute="leading" secondItem="eRa-d8-x4m" secondAttribute="leading" id="Wc3-DU-jw7"/>
+                            <constraint firstItem="eRa-d8-x4m" firstAttribute="trailing" secondItem="K4T-Kk-MBs" secondAttribute="trailing" id="Zpq-oh-Zsq"/>
                             <constraint firstItem="O74-hz-cxy" firstAttribute="leading" secondItem="eRa-d8-x4m" secondAttribute="leading" constant="150" id="mxp-kb-hd6"/>
                             <constraint firstItem="O74-hz-cxy" firstAttribute="top" secondItem="eRa-d8-x4m" secondAttribute="top" constant="150" id="nGe-je-bUX"/>
+                            <constraint firstItem="K4T-Kk-MBs" firstAttribute="top" secondItem="O74-hz-cxy" secondAttribute="bottom" id="pJY-uq-m1m"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Nguyen T Trang" leftItemsSupplementBackButton="YES" largeTitleDisplayMode="always" id="ooN-wL-5U1"/>

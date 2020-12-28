@@ -48,7 +48,7 @@ class ChatViewController: UIViewController {
             print("_______")
             var a = DataMessage(time: "", content: "", roomID: 0, from: "", to: "")
 
-            if let json = try? JSONDecoder().decode(DataMessage.self, from: data!){
+            if let json = try? JSONDecoder().decode(DataMessage.self, from: data!) {
                 a = json
                 let willSavedMessage = DataMessage(time: a.time, content: a.content, roomID: a.roomID, from: a.from, to: a.to)
                 print(a)
@@ -155,7 +155,7 @@ class ChatViewController: UIViewController {
 //        }
         
         let sendingMessage = DataMessage(time: Time.currentTimeString, content: messageText, roomID: currentSession.data.roomID, from: currentUserID!, to: to)
-        messageArray.append(sendingMessage)
+//        messageArray.append(sendingMessage)
         WebServices.update(sendingMessage, for: currentSession) { success in
           if success {
             print("... updated location")
@@ -164,8 +164,8 @@ class ChatViewController: UIViewController {
           }
         }
         
-        chatTableView.reloadData()
-        chatTableView.scrollToRow(at: IndexPath(row: messageArray.count - 1, section: 0), at: .bottom, animated: true)
+//        chatTableView.reloadData()
+//        chatTableView.scrollToRow(at: IndexPath(row: messageArray.count - 1, section: 0), at: .bottom, animated: true)
     }
     
     
@@ -239,7 +239,6 @@ extension ChatViewController:  UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        startSocket(currentSession)
         if messageArray.count > maxLoadingMessage {
             return maxLoadingMessage
         }
