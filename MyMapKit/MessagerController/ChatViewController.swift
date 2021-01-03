@@ -41,6 +41,7 @@ class ChatViewController: UIViewController {
         }
         
         ws.event.message = { [weak self] message in
+            guard let strongSelf = self else { return }
 //            guard let bytes = message as? [UInt8] else { return }
             
             let data = (message as! String).data(using: .utf8)
@@ -53,9 +54,9 @@ class ChatViewController: UIViewController {
                 let willSavedMessage = DataMessage(time: a.time, content: a.content, roomID: a.roomID, from: a.from, to: a.to)
                 print(a)
                 print(willSavedMessage)
-                self!.messageArray.append(willSavedMessage)
-                self!.chatTableView.reloadData()
-                self!.chatTableView.scrollToRow(at: IndexPath(row: self!.messageArray.count - 1, section: 0), at: .bottom, animated: true)
+                strongSelf.messageArray.append(willSavedMessage)
+                strongSelf.chatTableView.reloadData()
+                strongSelf.chatTableView.scrollToRow(at: IndexPath(row: self!.messageArray.count - 1, section: 0), at: .bottom, animated: true)
             }
             
 //            let data = Data(bytes: bytes)

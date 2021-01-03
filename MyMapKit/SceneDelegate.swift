@@ -30,16 +30,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window?.rootViewController = rootVC
             self.window?.makeKeyAndVisible()
         }
+        // App auto jump into Main.storyboard
         
         // for mess app
-        else {
-            self.window = UIWindow(windowScene: windowScene)
-            let storyboard = UIStoryboard(name: "Messager", bundle: nil)
-            let rootVC = storyboard.instantiateViewController(identifier: "MessageBranch")
-            //            let rootNC = UINavigationController(rootViewController: rootVC)
-            self.window?.rootViewController = rootVC
-            self.window?.makeKeyAndVisible()
-        }
+//        else {
+//            self.window = UIWindow(windowScene: windowScene)
+//            let storyboard = UIStoryboard(name: "Messager", bundle: nil)
+//            let rootVC = storyboard.instantiateViewController(identifier: "MessageBranch")
+//            //            let rootNC = UINavigationController(rootViewController: rootVC)
+//            self.window?.rootViewController = rootVC
+//            self.window?.makeKeyAndVisible()
+//        }
         
         // method 2
 //        let windowScene = UIWindowScene(session: session, connectionOptions: connectionOptions)

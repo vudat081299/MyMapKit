@@ -14,7 +14,7 @@ import CoreLocation
 //    static var userLocation = CLLocation()
 //}
 
-var demo = false
+var demo = true
 
 // MARK: - MapView container.
 class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
@@ -413,13 +413,13 @@ extension ViewController {
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(userLocation!) { (placemarks, error) in
             if (error != nil){
-                print("error in reverseGeocode - can not get location of device!")
+//                print("error in reverseGeocode - can not get location of device!")
             }
             var placemark: [CLPlacemark]!
             if placemarks != nil {
                 placemark = placemarks! as [CLPlacemark]
             } else {
-                print("loading location..")
+//                print("loading location..")
                 return
             }
             if placemark.count > 0 {

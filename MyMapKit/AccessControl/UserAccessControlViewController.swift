@@ -143,7 +143,7 @@ class UserAccessControlViewController: UIViewController, UIScrollViewDelegate {
 //                            self.performSegue(withIdentifier: "didLogin", sender: nil)
 //                        }
                         
-                        let vc = UIStoryboard(name: "Messager", bundle: nil).instantiateInitialViewController()!
+                        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()!
                         vc.modalPresentationStyle = .fullScreen
                         self.present(vc, animated:true, completion:nil)
                     }
@@ -185,8 +185,6 @@ class UserAccessControlViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func customIpAction(_ sender: UIButton) {
-        print(usernameTextField.text!)
-        print(passwordTextField.text!)
         ip = usernameTextField.text!
         if passwordTextField.text == "true" {
             demo = true

@@ -62,7 +62,6 @@ class AnnotationView: MKAnnotationView {
             guard let artwork = newValue as? Annotation else {
                 return
             }
-            print("annotation")
             currentAnnotation = artwork
             
             if imageView != nil {
