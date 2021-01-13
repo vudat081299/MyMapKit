@@ -31,7 +31,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window?.makeKeyAndVisible()
         }
         // App auto jump into Main.storyboard
-        
         // for mess app
 //        else {
 //            self.window = UIWindow(windowScene: windowScene)
